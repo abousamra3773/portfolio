@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Perks - Special Savings</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+        
+body {
+    font-family: Arial, sans-serif;
+    background-color: white;
+    overflow-x: hidden;
+}
+
+.benefitsPage, 
+.page,
+.simpleLayout,
+.benefits,
+section {
+    overflow: visible;
+}
+        
+.ArnSubPage.WBStaticForm.secure-benefits {
+    display: block;
+    background-color: #fff;
+}
+        
+h2.section-title {
+    display: flex;
+    justify-content: center;
+    font-family: Arial, sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 23px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    padding: 40px 0 10px;
+}
+        
+.cards-container {
+    display: flex;
+    overflow-x: auto;
+    gap: 20px;
+    padding: 10px 0;
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: #888 #f1f1f1;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    width: 100%;
+    margin: 0 auto;
+    max-width: 1350px;
+    overflow: hidden;
+}
+        
+h2.card-title {
+    color: #36382E;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 23px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    font-family: Arial, sans-serif;
+}
+
+.quoteLink {
+    margin: 0 0 16px 0;
+}
+        
+.quoteLink a.quote-link {
+    margin: 0 0 0 20px;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 700; 
+    line-height: 26px;
+    text-decoration: none; 
+    padding: 0;
+    text-transform: uppercase;
+    color: #236180;
+}
+        
+.cards-container::-webkit-scrollbar {
+    height: 0;
+    width: 0;
+    display: none;
+}
+        
+.card {
+    flex: 0 0 320px;
+    scroll-snap-align: start;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: none;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    height: 540px;
+    position: relative;
+    transform: translateZ(0);
+    will-change: transform;
+}
+        
+.card.expanded {
+    height: auto;
+}
+        
+.card-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+        
+.card-content {
+    padding: 20px;
+    min-height: 280px
+}
+        
+.card-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+}
+        
+.card-description {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 15px;
+    line-height: 1.4;
+}
+        
+.card-expandable {
+    height: 0;
+    overflow: hidden;
+    transition: height 0.3s ease;
+}
+        
+.card.expanded .card-expandable {
+    height: auto;
+    margin-top: 15px;
+}
+        
+.read-more {
+    display: inline-block;
+    color: #236180;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    position: absolute;
+    bottom: 40px;
+    left: 20px;
+}
+        
+.read-more:hover {
+    text-decoration: underline;
+}
+        
+.card.expanded .read-more {
+    position: relative;
+    bottom: 0;
+    margin-top: 15px;
+}
+
+.navigation-tabs-container {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: #fff;
+    width: 100%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 0;
+    padding: 0;
+}
+
+.navigation-tabs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 95px;
+    background-color: #fff;
+    width: 100%;
+}
+
+.tab:hover, .tab.active  {
+   color: #36382e;
+   font-weight: 700;
+   border-bottom: 2px solid #236180;
+}
+
+.tab {
+    padding: 6px 24px;
+    margin: 0 15px;
+    cursor: pointer;
+    font-weight: 400;
+    color: #36382e;
+    transition: all 0.3s ease;
+    display: block !important;
+}
+
+.section-title {
+    text-align: center;
+    padding: 20px 0;
+    font-size: 28px;
+    color: #333;
+}
+
+.back-to-top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    background-color: #236180;
+    color: white;
+    border: 1px solid #F5F5F5;
+    border-radius: 32px;
+    padding: 10px 26px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 0 auto 34px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    gap: 8px;
+}
+
+.back-to-top:hover {
+    background-color: #2D7295;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.arrow-up {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-left: 3px solid white;
+    border-top: 3px solid white;
+    transform: rotate(45deg);
+    margin-right: 10px;
+    margin-bottom: 2px;
+}
+
+.section {
+    padding: 10px 20px 30px;
+}
+
+.cards-navigation {
+    position: relative;
+    width: 100%;
+    padding: 0 50px;
+    max-width: 1500px;
+    margin: 0 auto;
+}
+
+.nav-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-100%);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: all 0.3s ease;
+}
+
+.nav-arrow:hover {
+    background-color: #236180;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.nav-arrow:hover svg {
+    stroke: white;
+}
+
+.nav-prev {
+    left: 5px;
+}
+
+.nav-next {
+    right: 5px;
+}
+
+p.card-description, .card-expandable p {
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 28px;
+    color:#000;
+}
+
+.benefitsPage .read-more {
+    display: inline;
+    color: #236180;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    position: static;
+    font-size: 18px;
+}
+
+.read-more:hover {
+    text-decoration: underline;
+}
+
+.read-less {
+    display: inline;
+    color: #236180;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.read-less:hover {
+    text-decoration: underline;
+}
+
+.card {
+    position: relative;
+    height: 480px;
+}
+
+.card.expanded {
+    height: auto;
+    padding-bottom: 10px;
+}
+
+.gray-line {
+    width: 320px;
+    height: 1px;
+    background-color: #C3C3C0;
+    margin: 10px 0;
+}
+
+.topContainer {
+    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=1200') center/cover;
+    padding: 80px 20px;
+    text-align: center;
+    color: white;
+}
+
+.topContainer h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.topContainer p {
+    font-size: 1.2rem;
+}
+
+@media screen and (max-width: 768px) {
+    .nav-arrow {
+        width: 36px;
+        height: 36px;
+        background-color: rgba(255, 255, 255, 0.95);
+    }
+  
+    .cards-navigation {
+        padding: 0 1.8rem;
+    }
+  
+    .nav-prev {
+        left: 4px;
+    }
+  
+    .nav-next {
+        right: 4px;
+    }
+
+    .card {
+        flex: 0 0 320px; 
+    }
+
+    .topContainer h1 {
+        font-size: 1.45rem !important;
+    }
+
+    .tab {
+        font-size: .8rem;
+        padding: .1rem;
+        margin: .5rem;
+        text-align: center;
+    }
+
+    .navigation-tabs {
+        padding: 0 5px;
+    }
+}
+
+@media (max-width: 480px) {
+    .card {
+        flex: 0 0 85vw;
+        max-width: 100%;
+    }
+
+    .card-image {
+        width: 100%;
+        height: unset;
+        object-fit: cover;
+    }
+
+    .cards-container {
+        gap: 10px;
+    }
+
+    .card-content {
+        padding: 10px 22px 10px;
+    }
+
+    h2.card-title {
+        font-size: .96rem;
+        letter-spacing: .6px;
+        text-align: center;
+    }
+
+    h2.section-title {
+        font-size: 18px;
+        letter-spacing: 4px;
+        padding: 30px 0 10px;
+        text-align: center;
+    }
+
+    .nav-arrow {
+        width: 32px;
+        height: 32px;
+        transform: translateY(-200%);
+    }
+
+    p.card-description, .card-expandable p {
+        font-size: 16px;
+    }
+
+    .benefitsPage .read-more {
+        font-size: 16px;
+    }
+}
+
+@media screen and (min-width: 1550px) {
+    .nav-arrow {
+        width: 60px !important;
+        height: 60px !important;
+    }
+
+    .card {
+        flex: 0 0 375px;
+    }
+
+    .cards-container {
+        max-width: 1450px;
+    }
+
+    .cards-navigation {
+        max-width: 1650px;
+    }
+}
+    </style>
+</head>
+<body class="benefitsPage">
+    <section class="topContainer">
+        <h1>SPECIAL SAVINGS FROM BRANDS YOU LOVE</h1>
+        <p>Discover savings to prepare and enhance your trip or enjoy at home.</p>
+    </section>
+
+    <div class="navigation-tabs-container">
+        <div id="top" class="navigation-tabs">
+            <div class="tab active" data-target="travel-perk-1">Prepare For Your Trip</div>
+            <div class="tab" data-target="travel-perk-2">Enhance Your Trip</div>
+            <div class="tab" data-target="travel-perk-3">Access Even More Perks At Home</div>
+        </div>
+    </div>
+
+    <!-- Section 1: Prepare For Your Trip -->
+    <div id="travel-perk-1" class="section">
+        <h2 class="section-title">Prepare For Your Trip</h2>
+        <div class="cards-navigation">
+            <div class="cards-container">
+                
+                <!-- Card 1 -->
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=400" alt="Travel insurance concept" class="card-image" /> 
+                    <div class="card-content">
+                        <h2 class="card-title">DON'T FORGET TO PACK TRAVEL INSURANCE</h2>
+                        <p class="card-description">You've booked an amazing trip — don't forget to add travel protection to help safeguard you and your trip investment...<a class="read-more">Read More</a></p>
+                        <div class="card-expandable">
+                            <p>With emergency assistance services anywhere you are in the world and comprehensive benefits, you can take off with some peace of mind that travel insurance is by your side.</p>
+                        </div>
+                    </div>
+                    <div class="quoteLink">
+                        <a href="#" class="quote-link">Get A Quote →</a>
+                    </div>
+                    <div class="gray-line"></div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1476362555312-ab9e108a0b7e?w=400" alt="Baby travel gear" class="card-image">
+                    <div class="card-content">
+                        <h2 class="card-title">PACK LIGHT. TRAVEL HAPPY. VACATION MORE.</h2>
+                        <p class="card-description">Save 10% off your next baby gear rental with promo code TRAVELANDLEISUREGO...<a class="read-more">Read More</a></p>
+                        <div class="card-expandable">
+                            <p>Stop lugging all that bulky baby gear with you on vacation. Rent clean, safe, and insured gear delivered to your hotel, vacation rental, or airport. Pack light. Travel happy. Vacation more...</p>
+                        </div>
+                    </div>
+                    <div class="quoteLink">
+                        <a href="#" class="quote-link">Rent Now →</a>
+                    </div>
+                    <div class="gray-line"></div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400" alt="Hot air balloons" class="card-image">
+                    <div class="card-content">
+                        <h2 class="card-title">NEVER OVERPAY FOR FLIGHTS AGAIN</h2>
+                        <p class="card-description">Over 2 million travelers trust this service to save hundreds on flights — like $230 roundtrip tickets to Paris or $583 to Vietnam...<a class="read-more">Read More</a></p>
+                        <div class="card-expandable">
+                            <p>Book one flight deal and it pays for itself, so don't let ridiculous airfare prices stop you from traveling. Sign up today for 30% off your first year.</p>
+                        </div>
+                    </div>
+                    <div class="quoteLink">
+                        <a href="#" class="quote-link">Get Flight Deals →</a>
+                    </div>
+                    <div class="gray-line"></div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=400" alt="Scenic drive" class="card-image">
+                    <div class="card-content">
+                        <h2 class="card-title">LEARN HOW TO DRIVE IN ANOTHER COUNTRY</h2>
+                        <p class="card-description">Learn how to drive in another country with expert online guides...<a class="read-more">Read More</a></p>
+                        <div class="card-expandable">
+                            <p>Understand local rules so you avoid surprises. Get comfortable driving overseas before you go. See more, go off the beaten path and enjoy a stress-free journey. Receive 25% OFF any guide with code TLG25OFF.</p>
+                        </div>
+                    </div>
+                    <div class="quoteLink">
+                        <a href="#" class="quote-link">Sign Up Now →</a>
+                    </div>
+                    <div class="gray-line"></div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1590674899484-d5640e854abe?w=400" alt="Airport parking" class="card-image">
+                    <div class="card-content">
+                        <h2 class="card-title">YOUR RUNWAY TO AIRPORT PARKING</h2>
+                        <p class="card-description">Join the Spot Club Program and save at least 10% when you travel...<a class="read-more">Read More</a></p>
+                        <div class="card-expandable">
+                            <p>Sign up by December 31, 2025, and you'll receive one free parking day for signing up.</p>
+                        </div>
+                    </div>
+                    <div class="quoteLink">
+                        <a href="#" class="quote-link">Join Today →</a>
+                    </div>
+                    <div class="gray-line"></div>
+                </div>
+
+            </div>
+
+            <button class="nav-arrow nav-prev">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+            </button>
+            <button class="nav-arrow nav-next">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <button class="back-to-top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="18" viewBox="0 0 20 18" fill="none">
+            <path d="M19.21 9.49492L10 0.294922L0.790039 9.49492L2.21004 10.9149L9.00004 4.11492V17.7049H11V4.11492L17.79 10.9149L19.21 9.49492Z" fill="white"/>
+        </svg>
+        Back to top
+    </button>
+
+    <script>
+    jQuery(document).ready(function($) {
+        
+        // Tab navigation - smooth scroll to sections
+        $('.tab').on('click', function() {
+            const targetId = $(this).data('target');
+            const targetElement = $('#' + targetId);
+            
+            // Remove active class from all tabs
+            $('.tab').removeClass('active');
+            // Add active class to clicked tab
+            $(this).addClass('active');
+            
+            // Smooth scroll to the target section
+            $('html, body').animate({
+                scrollTop: targetElement.offset().top - 100 // Offset for sticky header
+            }, 800);
+        });
+
+        // Back to top button
+        $('.back-to-top').on('click', function() {
+            $('html, body').animate({
+                scrollTop: 0
+            }, 800);
+        });
+
+        // Read More/Less functionality
+        $('.read-more').on('click', function(e) {
+            e.preventDefault();
+            
+            let card = $(this).closest('.card');
+            let expandableContent = card.find('.card-expandable');
+            
+            // Expand the card
+            card.addClass('expanded');
+            
+            // Show the expandable content
+            expandableContent.slideDown(300);
+            
+            // Hide the Read More link
+            $(this).hide();
+            
+            // Add Read Less link if it doesn't exist
+            if (expandableContent.find('.read-less').length === 0) {
+                expandableContent.find('p:last').append(' <a href="#" class="read-less">Read Less</a>');
+                
+                // Add click handler to the new Read Less link
+                expandableContent.find('.read-less').on('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Hide expandable content
+                    expandableContent.slideUp(300, function() {
+                        card.find('.read-more').show();
+                    });
+                    
+                    // Remove expanded class from card
+                    card.removeClass('expanded');
+                    
+                    // Remove this Read Less link
+                    $(this).remove();
+                    
+                    // Scroll back to the top of the card
+                    card[0].scrollIntoView({behavior: 'smooth', block: 'nearest'});
+                });
+            }
+        });
+
+        // Arrow scroll functionality
+        function getCardWidth() {
+            const card = $('.card').first();
+            return card.outerWidth(true);
+        }
+
+        function scrollCards(direction, container) {
+            const containerWidth = container.width();
+            const cardWidth = getCardWidth();
+            const visibleCards = Math.floor(containerWidth / cardWidth);
+            const scrollByPage = (visibleCards >= 2);
+            
+            let scrollAmount;
+            if (scrollByPage) {
+                scrollAmount = direction === 'prev' ? 
+                    -(cardWidth * (visibleCards - 1)) : 
+                    (cardWidth * (visibleCards - 1));
+            } else {
+                scrollAmount = direction === 'prev' ? -cardWidth : cardWidth;
+            }
+            
+            const currentScroll = container.scrollLeft();
+            
+            container.animate({
+                scrollLeft: currentScroll + scrollAmount
+            }, {
+                duration: 400,
+                easing: 'swing',
+                complete: function() {
+                    updateArrowVisibility(container);
+                }
+            });
+        }
+
+        function updateArrowVisibility(container) {
+            const maxScrollLeft = container[0].scrollWidth - container[0].clientWidth;
+            const currentScrollLeft = container.scrollLeft();
+            
+            const prevArrow = container.parent().find('.nav-prev');
+            const nextArrow = container.parent().find('.nav-next');
+            
+            const startThreshold = 10;
+            const endThreshold = 10;
+            
+            if (currentScrollLeft <= startThreshold) {
+                prevArrow.css({
+                    'opacity': '0.5',
+                    'pointer-events': 'none'
+                });
+            } else {
+                prevArrow.css({
+                    'opacity': '1',
+                    'pointer-events': 'auto'
+                });
+            }
+            
+            if (currentScrollLeft >= maxScrollLeft - endThreshold) {
+                nextArrow.css({
+                    'opacity': '0.5',
+                    'pointer-events': 'none'
+                });
+            } else {
+                nextArrow.css({
+                    'opacity': '1',
+                    'pointer-events': 'auto'
+                });
+            }
+        }
+
+        // Initialize arrow visibility for all containers
+        $('.cards-container').each(function() {
+            updateArrowVisibility($(this));
+        });
+
+        // Click handlers for arrows
+        let isScrolling = false;
+
+        $('.nav-prev').on('click', function() {
+            if (isScrolling) return;
+            
+            isScrolling = true;
+            const container = $(this).closest('.cards-navigation').find('.cards-container');
+            scrollCards('prev', container);
+            
+            setTimeout(function() {
+                isScrolling = false;
+            }, 450);
+        });
+
+        $('.nav-next').on('click', function() {
+            if (isScrolling) return;
+            
+            isScrolling = true;
+            const container = $(this).closest('.cards-navigation').find('.cards-container');
+            scrollCards('next', container);
+            
+            setTimeout(function() {
+                isScrolling = false;
+            }, 450);
+        });
+
+        // Update arrow visibility on resize
+        let resizeTimer;
+        $(window).on('resize', function() {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(function() {
+                $('.cards-container').each(function() {
+                    updateArrowVisibility($(this));
+                });
+            }, 150);
+        });
+
+        // Update arrow visibility when scrolling manually
+        let scrollTimer;
+        $('.cards-container').on('scroll', function() {
+            clearTimeout(scrollTimer);
+            scrollTimer = setTimeout(function() {
+                updateArrowVisibility($(this));
+            }.bind(this), 100);
+        });
+
+        // Touch swipe support for mobile
+        $('.cards-container').on('touchstart', function(e) {
+            const startX = e.originalEvent.touches[0].pageX;
+            let touchMoved = false;
+
+            $(this).on('touchmove', function(e) {
+                touchMoved = true;
+            });
+
+            $(this).on('touchend', function(e) {
+                const endX = e.originalEvent.changedTouches[0].pageX;
+                const container = $(this);
+                
+                if (touchMoved && Math.abs(startX - endX) > 50) {
+                    if (startX > endX) {
+                        scrollCards('next', container);
+                    } else {
+                        scrollCards('prev', container);
+                    }
+                }
+                
+                $(this).off('touchmove touchend');
+                touchMoved = false;
+            });
+        });
+
+    });
+    </script>
+</body>
+</html>="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+            </button>
+            <button class="nav-arrow nav-next">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Section 2: Enhance Your Trip -->
+    <div id="travel-perk-2" class="section">
+        <h2 class="section-title">Enhance Your Trip</h2>
+        <div class="cards-navigation">
+            <div class="cards-container">
+                
+                <!-- Card 1 -->
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=400" alt="Airport lounge" class="card-image" /> 
+                    <div class="card-content">
+                        <h2 class="card-title">LOUNGE PASS™ ACCESS</h2>
+                        <p class="card-description">Enjoy single-use pre-booked airport lounge access at both the outward and homeward ends of the journey...<a class="read-more">Read More</a></p>
+                        <div class="card-expandable">
+                            <p>Regardless of your class of ticket. Elevate your travel experience and enjoy access to 800+ airport lounges and sleep pods across 350 airports worldwide.</p>
+                        </div>
+                    </div>
+                    <div class="quoteLink">
+                        <a href="#" class="quote-link">RESERVE YOUR LOUNGE →</a>
+                    </div>
+                    <div class="gray-line"></div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1551632811-561732d1e306?w=400" alt="Hiking trail" class="card-image">
+                    <div class="card-content">
+                        <h2 class="card-title">GET 3 MONTHS FREE OF TRAIL MEMBERSHIP</h2>
+                        <p class="card-description">Your definitive digital trail expert and companion to the outdoors. With membership...<a class="read-more">Read More</a></p>
+                        <div class="card-expandable">
+                            <p>You'll unlock offline maps, immersive trail previews, and more features that help you make the most of your time outside. Get 3 months free with code GoWithTrails.</p>
+                        </div>
+                    </div>
+                    <div class="quoteLink">
+                        <a href="#" class="quote-link">SIGN UP NOW →</a>
+                    </div>
+                    <div class="gray-line"></div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1530541930197-ff16ac917b0e?w=400" alt="Adventure book" class="card-image">
+                    <div class="card-content">
+                        <h2 class="card-title">THE ADVENTURE CHALLENGE</h2>
+                        <p class="card-description">Elevate any travel experience with The Adventure Challenge Travel Edition! Whether you're...<a class="read-more">Read More</a></p>
+                        <div class="card-expandable">
+                            <p>Going on a road trip or exploring an exotic destination—just pick a challenge, scratch it off, and see where the adventure takes you. Receive 20% off all Travel Edition books with exclusive code TANDLGO20.</p>
+                        </div>
+                    </div>
+                    <div class="quoteLink">
+                        <a href="#" class="quote-link">Learn More →</a>
+                    </div>
+                    <div class="gray-line"></div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1565026057447-bc90a3dceb87?w=400" alt="Luggage" class="card-image">
+                    <div class="card-content">
+                        <h2 class="card-title">TRAVEL LUGGAGE OFFER</h2>
+                        <p class="card-description">Travel like a pro with first-class travel luggage sets and travel accessories...<a class="read-more">Read More</a></p>
+                        <div class="card-expandable">
+                            <p>Members save 20% on premium travel collections.</p>
+                        </div>
+                    </div>
+                    <div class="quoteLink">
+                        <a href="#" class="quote-link">Buy Now →</a>
+                    </div>
+                    <div class="gray-line"></div>
+                </div>
+
+            </div>
+
+            <button class="nav-arrow nav-prev">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+            </button>
+            <button class="nav-arrow nav-next">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Section 3: More Perks At Home -->
+    <div id="travel-perk-3" class="section">
+        <h2 class="section-title">Access Even More Perks At Home</h2>
+        <div class="cards-navigation">
+            <div class="cards-container">
+                
+                <!-- Card 1 -->
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=400" alt="Home meal kit" class="card-image" /> 
+                    <div class="card-content">
+                        <h2 class="card-title">SAVE 50% ON HOME MEAL KITS</h2>
+                        <p class="card-description">Home meal delivery made simple. Save 50% on your first 4 orders, that's 19 free meals...<a class="read-more">Read More</a></p>
+                        <div class="card-expandable">
+                            <p>Delivers easy-to-follow recipes and fresh, pre-portioned ingredients directly to your door. Choose from 30+ meal options every week. Create and plate delicious meals in about 30 minutes.</p>
+                        </div>
+                    </div>
+                    <div class="quoteLink">
+                        <a href="#" class="quote-link">Redeem Now →</a>
+                    </div>
+                    <div class="gray-line"></div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=400" alt="Home decor" class="card-image">
+                    <div class="card-content">
+                        <h2 class="card-title">BRING THE JOYS OF TRAVEL HOME</h2>
+                        <p class="card-description">Wanderlust awaits. Immerse yourself in the effortless beauty and captivating details with travel-inspired bedding, bath and throws...<a class="read-more">Read More</a></p>
+                        <div class="card-expandable">
+                            <p>We use the finest materials and craftsmanship to transform your sleep sanctuary into a haven of global comfort. Get 20% off with code TLG20.</p>
+                        </div>
+                    </div>
+                    <div class="quoteLink">
+                        <a href="#" class="quote-link">Redeem Now →</a>
+                    </div>
+                    <div class="gray-line"></div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=400" alt="Genealogy" class="card-image">
+                    <div class="card-content">
+                        <h2 class="card-title">SAVE $25 ON ANCESTRY MEMBERSHIP</h2>
+                        <p class="card-description">Unlock your family's history! As a member, delve into a...<a class="read-more">Read More</a></p>
+                        <div class="card-expandable">
+                            <p>A treasure trove of genealogical resources. Join now and save $25 off new memberships. Discover your roots and preserve your legacy with exclusive access and savings!</p>
+                        </div>
+                    </div>
+                    <div class="quoteLink">
+                        <a href="#" class="quote-link">Join Today →</a>
+                    </div>
+                    <div class="gray-line"></div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=400" alt="Smart bed" class="card-image">
+                    <div class="card-content">
+                        <h2 class="card-title">SAVE $200 ON SELECT SMART BEDS</h2>
+                        <p class="card-description">When you return from an adventure, there's nothing like sleeping in a smart bed...<a class="read-more">Read More</a></p>
+                        <div class="card-expandable">
+                            <p>That adjusts to you for all-night comfort. That's why we've partnered to offer you an EXTRA $200 in savings on smart beds.</p>
+                        </div>
+                    </div>
+                    <div class="quoteLink">
+                        <a href="#" class="quote-link">Learn More →</a>
+                    </div>
+                    <div class="gray-line"></div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=400" alt="Cooking kit" class="card-image">
+                    <div class="card-content">
+                        <h2 class="card-title">GLOBAL CUISINE & CULTURE</h2>
+                        <p class="card-description">Discover the joy of global cuisine with award-winning experience-in-a-box cooking kit...<a class="read-more">Read More</a></p>
+                        <div class="card-expandable">
+                            <p>You and your family can explore authentic flavors from around the world and immerse yourself in diverse cultures — all from the comfort of your own kitchen. Get 25% off when you enter promo code.</p>
+                        </div>
+                    </div>
+                    <div class="quoteLink">
+                        <a href="#" class="quote-link">Learn More →</a>
+                    </div>
+                    <div class="gray-line"></div>
+                </div>
+
+            </div>
+
+            <button class="nav-arrow nav-prev">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height
