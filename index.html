@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amy Littlefield-Bousamra | Front-End Developer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            animation: fadeInUp 1s ease;
+        }
+        
+        header p {
+            font-size: 1.4rem;
+            opacity: 0.95;
+            animation: fadeInUp 1s ease 0.2s backwards;
+            margin-bottom: 0.5rem;
+        }
+        
+        .header-subtitle {
+            font-size: 1.1rem;
+            opacity: 0.85;
+            animation: fadeInUp 1s ease 0.3s backwards;
+        }
+        
+        .scroll-indicator {
+            margin-top: 3rem;
+            animation: bounce 2s infinite;
+        }
+        
+        .scroll-indicator a {
+            color: white;
+            font-size: 2rem;
+            text-decoration: none;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+        
+        nav {
+            background: rgba(255, 255, 255, 0.98);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        nav a {
+            color: #2c3e50;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+            padding: 0.5rem 1rem;
+        }
+        
+        nav a:hover {
+            color: #3498db;
+        }
+        
+        .section {
+            min-height: 100vh;
+            padding: 6rem 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .section:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        .container {
+            max-width: 1200px;
+            width: 100%;
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, #3498db, #2c3e50);
+        }
+        
+        #about h2 {
+            color: #e74c3c;
+        }
+        
+        #about h2::after {
+            background: linear-gradient(90deg, #e74c3c, #c0392b);
+        }
+        
+        #experience h2 {
+            color: #3498db;
+        }
+        
+        #experience h2::after {
+            background: linear-gradient(90deg, #3498db, #2980b9);
+        }
+        
+        #projects h2 {
+            color: #27ae60;
+        }
+        
+        #projects h2::after {
+            background: linear-gradient(90deg, #27ae60, #229954);
+        }
+        
+        #skills h2 {
+            color: #f39c12;
+        }
+        
+        #skills h2::after {
+            background: linear-gradient(90deg, #f39c12, #e67e22);
+        }
+        
+        #contact h2 {
+            color: #9b59b6;
+        }
+        
+        #contact h2::after {
+            background: linear-gradient(90deg, #9b59b6, #8e44ad);
+        }
+        
+        .about-content {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #555;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .about-content p {
+            margin-bottom: 1.5rem;
+        }
+        
+        .experience-timeline {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .experience-card {
+            background: white;
+            border-radius: 16px;
+            padding: 3rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            border-left: 6px solid #3498db;
+            transition: transform 0.3s ease;
+        }
+        
+        .experience-card:hover {
+            transform: translateX(10px);
+        }
+        
+        .experience-card h3 {
+            color: #3498db;
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .role {
+            font-weight: 600;
+            color: #555;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .duration {
+            color: #888;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+        
+        .experience-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .experience-card li {
+            padding-left: 1.5rem;
+            margin-bottom: 0.8rem;
+            position: relative;
+            color: #666;
+        }
+        
+        .experience-card li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: #3498db;
+            font-weight: bold;
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .project-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border-top: 4px solid #27ae60;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+        
+        .project-card:nth-child(1) {
+            border-top-color: #27ae60;
+        }
+        
+        .project-card:nth-child(2) {
+            border-top-color: #3498db;
+        }
+        
+        .project-card:nth-child(3) {
+            border-top-color: #e74c3c;
+        }
+        
+        .project-card:nth-child(4) {
+            border-top-color: #f39c12;
+        }
+        
+        .project-card h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .project-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .project-link {
+            display: inline-block;
+            margin-top: 1rem;
+            color: #27ae60;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        
+        .project-card:nth-child(1) .project-link {
+            color: #27ae60;
+        }
+        
+        .project-card:nth-child(2) .project-link {
+            color: #3498db;
+        }
+        
+        .project-card:nth-child(3) .project-link {
+            color: #e74c3c;
+        }
+        
+        .project-card:nth-child(4) .project-link {
+            color: #f39c12;
+        }
+        
+        .project-link:hover {
+            text-decoration: underline;
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1.5rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .skill-tag {
+            background: white;
+            color: #f39c12;
+            padding: 1.5rem 1rem;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border: 3px solid #f39c12;
+        }
+        
+        .skill-tag:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(243, 156, 18, 0.3);
+        }
+        
+        .contact-content {
+            text-align: center;
+            background: white;
+            padding: 4rem 3rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.1);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .contact-content p {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+        
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .contact-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            display: inline-block;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+        }
+        
+        .contact-links a:nth-child(1) {
+            background: linear-gradient(135deg, #9b59b6, #8e44ad);
+        }
+        
+        .contact-links a:nth-child(2) {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+        }
+        
+        .contact-links a:nth-child(3) {
+            background: linear-gradient(135deg, #0077b5, #005582);
+        }
+        
+        .contact-links a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: #2c3e50;
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5rem;
+            }
+            
+            header p {
+                font-size: 1.1rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+            
+            .section {
+                padding: 4rem 1rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+            }
+            
+            nav a {
+                padding: 0.3rem 0.5rem;
+                font-size: 0.9rem;
+            }
+            
+            .experience-card {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Amy Littlefield-Bousamra</h1>
+        <p>Front-End Web Developer</p>
+        <p class="header-subtitle">Specialized in HTML, CSS, JavaScript & Responsive Design</p>
+        <div class="scroll-indicator">
+            <a href="#about">↓</a>
+        </div>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+    
+    <section id="about" class="section">
+        <div class="container">
+            <h2>About Me</h2>
+            <div class="about-content">
+                <p>Dedicated front-end web developer with strong expertise in HTML, CSS, and JavaScript. I have a proven track record in creating responsive web designs and ensuring cross-browser compatibility for enhanced user experiences.</p>
+                <p>With nearly 5 years at Travel + Leisure Co, I've developed user-friendly interfaces for travel booking applications, collaborated with designers to create responsive layouts, and maintained high coding standards across multiple platforms. I'm passionate about building accessible, performant web applications that delight users.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section id="experience" class="section">
+        <div class="container">
+            <h2>Experience</h2>
+            <div class="experience-timeline">
+                <div class="experience-card">
+                    <h3>Travel + Leisure Co</h3>
+                    <div class="role">Front-End Web Developer</div>
+                    <div class="duration">Orlando - Remote, MI • June 2021 - October 2025</div>
+                    <ul>
+                        <li>Developed user-friendly interfaces for travel booking applications</li>
+                        <li>Collaborated with designers to create responsive web layouts</li>
+                        <li>Implemented cross-browser compatibility for optimal user experience</li>
+                        <li>Utilized HTML, CSS, and JavaScript to enhance website functionality</li>
+                        <li>Conducted usability testing to gather user feedback on features</li>
+                        <li>Implemented responsive web designs for mobile devices using HTML5, CSS3, JavaScript, jQuery, and Bootstrap framework</li>
+                        <li>Debugged front-end code issues and resolved cross-browser compatibility problems</li>
+                        <li>Optimized existing user interface designs to improve usability and accessibility</li>
+                    </ul>
+                </div>
+                
+                <div class="experience-card">
+                    <h3>Stony Point Web Design</h3>
+                    <div class="role">Self Employed Web Developer</div>
+                    <div class="duration">Traverse City, Michigan • June 2015 - June 2021</div>
+                    <ul>
+                        <li>Developed responsive web applications using HTML, CSS, and JavaScript frameworks</li>
+                        <li>Managed version control using Git for streamlined development processes</li>
+                        <li>Conducted testing and troubleshooting to ensure cross-browser compatibility</li>
+                        <li>Built layouts according to customer parameters using HTML5 and CSS3</li>
+                        <li>Implemented responsive design techniques to ensure optimal viewing experience across multiple devices</li>
+                        <li>Provided technical support in resolving customer issues related to web development projects</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="projects" class="section">
+        <div class="container">
+            <h2>Featured Projects</h2>
+            <div class="projects-grid">
+                <a href="https://your-project-link-1.com" target="_blank" class="project-card">
+                    <h3>Travel Booking Interface</h3>
+                    <p>Built user-friendly booking interfaces for Travel + Leisure properties with responsive design and cross-browser compatibility, enhancing the booking experience for thousands of users.</p>
+                    <span class="project-link">View Site →</span>
+                </a>
+                <a href="https://your-project-link-2.com" target="_blank" class="project-card">
+                    <h3>T+L Go Platform</h3>
+                    <p>Developed front-end features for Travel + Leisure's membership platform, focusing on responsive layouts and optimal user experience across all devices.</p>
+                    <span class="project-link">View Site →</span>
+                </a>
+                <a href="https://your-project-link-3.com" target="_blank" class="project-card">
+                    <h3>Travel Club Website</h3>
+                    <p>Created responsive web applications for travel club memberships using HTML5, CSS3, jQuery, and Bootstrap, ensuring seamless functionality across platforms.</p>
+                    <span class="project-link">View Site →</span>
+                </a>
+                <a href="https://your-project-link-4.com" target="_blank" class="project-card">
+                    <h3>Client Portfolio Sites</h3>
+                    <p>Designed and developed custom websites for diverse clients using modern web technologies, focusing on responsive design and accessibility standards.</p>
+                    <span class="project-link">View Site →</span>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <section id="skills" class="section">
+        <div class="container">
+            <h2>Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-tag">HTML5</div>
+                <div class="skill-tag">CSS3</div>
+                <div class="skill-tag">JavaScript</div>
+                <div class="skill-tag">jQuery</div>
+                <div class="skill-tag">React.js</div>
+                <div class="skill-tag">Bootstrap</div>
+                <div class="skill-tag">Responsive Design</div>
+                <div class="skill-tag">Cross-Browser</div>
+                <div class="skill-tag">Photoshop</div>
+                <div class="skill-tag">Git</div>
+                <div class="skill-tag">UX Design</div>
+                <div class="skill-tag">AI Tools</div>
+                <div class="skill-tag">Debugging</div>
+                <div class="skill-tag">Accessibility</div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="contact" class="section">
+        <div class="container">
+            <h2>Get In Touch</h2>
+            <div class="contact-content">
+                <p>Interested in working together? Let's connect!</p>
+                <div class="contact-links">
+                    <a href="mailto:amybousamra@live.com">Email Me</a>
+                    <a href="https://github.com/yourusername" target="_blank">GitHub</a>
+                    <a href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <p>&copy; 2025 Amy Littlefield-Bousamra. All rights reserved.</p>
+    </footer>
+</body>
+</html>
