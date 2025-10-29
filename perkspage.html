@@ -754,4 +754,255 @@ p.card-description, .card-expandable p {
                     <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400" alt="Fertility services" class="card-image">
                     <div class="card-content">
                         <h2 class="card-title">FERTILITY SERVICES</h2>
-                        <p class="card-description">Comprehensive fertility evaluation, treatment, and family planning support...<a class="read-more
+                        <p class="card-description">Comprehensive fertility evaluation, treatment, and family planning support...<a class="read-more">Read More</a></p>
+                        <div class="card-expandable">
+                            <p>Coverage for fertility testing, IVF, IUI, and adoption assistance. Access to reproductive endocrinologists and fertility specialists. Emotional support and counseling included.</p>
+                        </div>
+                    </div>
+                    <div class="quoteLink">
+                        <a href="#" class="quote-link">Learn More →</a>
+                    </div>
+                    <div class="gray-line"></div>
+                </div>
+
+            </div>
+
+            <button class="nav-arrow nav-prev">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+            </button>
+            <button class="nav-arrow nav-next">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Back to Top Button - ONLY AT THE VERY BOTTOM -->
+    <button class="back-to-top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="18" viewBox="0 0 20 18" fill="none">
+            <path d="M19.21 9.49492L10 0.294922L0.790039 9.49492L2.21004 10.9149L9.00004 4.11492V17.7049H11V4.11492L17.79 10.9149L19.21 9.49492Z" fill="white"/>
+        </svg>
+        Back to top
+    </button>
+
+    <script>
+    jQuery(document).ready(function($) {
+        
+        // Tab navigation - smooth scroll to sections
+        $('.tab').on('click', function() {
+            const targetId = $(this).data('target');
+            const targetElement = $('#' + targetId);
+            
+            // Remove active class from all tabs
+            $('.tab').removeClass('active');
+            // Add active class to clicked tab
+            $(this).addClass('active');
+            
+            // Smooth scroll to the target section
+            $('html, body').animate({
+                scrollTop: targetElement.offset().top - 100 // Offset for sticky header
+            }, 800);
+        });
+
+        // Back to top button
+        $('.back-to-top').on('click', function() {
+            $('html, body').animate({
+                scrollTop: 0
+            }, 800);
+        });
+
+        // Read More/Less functionality
+        $('.read-more').on('click', function(e) {
+            e.preventDefault();
+            
+            let card = $(this).closest('.card');
+            let expandableContent = card.find('.card-expandable');
+            
+            // Expand the card
+            card.addClass('expanded');
+            
+            // Show the expandable content
+            expandableContent.slideDown(300);
+            
+            // Hide the Read More link
+            $(this).hide();
+            
+            // Add Read Less link if it doesn't exist
+            if (expandableContent.find('.read-less').length === 0) {
+                expandableContent.find('p:last').append(' <a href="#" class="read-less">Read Less</a>');
+                
+                // Add click handler to the new Read Less link
+                expandableContent.find('.read-less').on('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Hide expandable content
+                    expandableContent.slideUp(300, function() {
+                        card.find('.read-more').show();
+                    });
+                    
+                    // Remove expanded class from card
+                    card.removeClass('expanded');
+                    
+                    // Remove this Read Less link
+                    $(this).remove();
+                    
+                    // Scroll back to the top of the card
+                    card[0].scrollIntoView({behavior: 'smooth', block: 'nearest'});
+                });
+            }
+        });
+
+        // Arrow scroll functionality
+        function getCardWidth() {
+            const card = $('.card').first();
+            return card.outerWidth(true);
+        }
+
+        function scrollCards(direction, container) {
+            const containerWidth = container.width();
+            const cardWidth = getCardWidth();
+            const visibleCards = Math.floor(containerWidth / cardWidth);
+            const scrollByPage = (visibleCards >= 2);
+            
+            let scrollAmount;
+            if (scrollByPage) {
+                scrollAmount = direction === 'prev' ? 
+                    -(cardWidth * (visibleCards - 1)) : 
+                    (cardWidth * (visibleCards - 1));
+            } else {
+                scrollAmount = direction === 'prev' ? -cardWidth : cardWidth;
+            }
+            
+            const currentScroll = container.scrollLeft();
+            
+            container.animate({
+                scrollLeft: currentScroll + scrollAmount
+            }, {
+                duration: 400,
+                easing: 'swing',
+                complete: function() {
+                    updateArrowVisibility(container);
+                }
+            });
+        }
+
+        function updateArrowVisibility(container) {
+            const maxScrollLeft = container[0].scrollWidth - container[0].clientWidth;
+            const currentScrollLeft = container.scrollLeft();
+            
+            const prevArrow = container.parent().find('.nav-prev');
+            const nextArrow = container.parent().find('.nav-next');
+            
+            const startThreshold = 10;
+            const endThreshold = 10;
+            
+            if (currentScrollLeft <= startThreshold) {
+                prevArrow.css({
+                    'opacity': '0.5',
+                    'pointer-events': 'none'
+                });
+            } else {
+                prevArrow.css({
+                    'opacity': '1',
+                    'pointer-events': 'auto'
+                });
+            }
+            
+            if (currentScrollLeft >= maxScrollLeft - endThreshold) {
+                nextArrow.css({
+                    'opacity': '0.5',
+                    'pointer-events': 'none'
+                });
+            } else {
+                nextArrow.css({
+                    'opacity': '1',
+                    'pointer-events': 'auto'
+                });
+            }
+        }
+
+        // Initialize arrow visibility for all containers
+        $('.cards-container').each(function() {
+            updateArrowVisibility($(this));
+        });
+
+        // Click handlers for arrows
+        let isScrolling = false;
+
+        $('.nav-prev').on('click', function() {
+            if (isScrolling) return;
+            
+            isScrolling = true;
+            const container = $(this).closest('.cards-navigation').find('.cards-container');
+            scrollCards('prev', container);
+            
+            setTimeout(function() {
+                isScrolling = false;
+            }, 450);
+        });
+
+        $('.nav-next').on('click', function() {
+            if (isScrolling) return;
+            
+            isScrolling = true;
+            const container = $(this).closest('.cards-navigation').find('.cards-container');
+            scrollCards('next', container);
+            
+            setTimeout(function() {
+                isScrolling = false;
+            }, 450);
+        });
+
+        // Update arrow visibility on resize
+        let resizeTimer;
+        $(window).on('resize', function() {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(function() {
+                $('.cards-container').each(function() {
+                    updateArrowVisibility($(this));
+                });
+            }, 150);
+        });
+
+        // Update arrow visibility when scrolling manually
+        let scrollTimer;
+        $('.cards-container').on('scroll', function() {
+            clearTimeout(scrollTimer);
+            scrollTimer = setTimeout(function() {
+                updateArrowVisibility($(this));
+            }.bind(this), 100);
+        });
+
+        // Touch swipe support for mobile
+        $('.cards-container').on('touchstart', function(e) {
+            const startX = e.originalEvent.touches[0].pageX;
+            let touchMoved = false;
+
+            $(this).on('touchmove', function(e) {
+                touchMoved = true;
+            });
+
+            $(this).on('touchend', function(e) {
+                const endX = e.originalEvent.changedTouches[0].pageX;
+                const container = $(this);
+                
+                if (touchMoved && Math.abs(startX - endX) > 50) {
+                    if (startX > endX) {
+                        scrollCards('next', container);
+                    } else {
+                        scrollCards('prev', container);
+                    }
+                }
+                
+                $(this).off('touchmove touchend');
+                touchMoved = false;
+            });
+        });
+
+    });
+    </script>
+</body>
+</html>
