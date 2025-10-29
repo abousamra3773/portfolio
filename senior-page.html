@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Golden Years Senior Center</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Lora', 'Georgia', serif;
+    background-color: #faf8f5;
+    color: #4a4a4a;
+    overflow-x: hidden;
+}
+
+/* Header */
+.header {
+    background: linear-gradient(135deg, rgba(230, 126, 80, 0.85) 0%, rgba(212, 98, 95, 0.85) 100%),
+                url('https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=1200') center/cover;
+    color: white;
+    padding: 100px 20px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+}
+
+.header h1 {
+    font-size: 3.5rem;
+    margin-bottom: 15px;
+    font-weight: 400;
+    letter-spacing: 3px;
+    position: relative;
+    z-index: 1;
+    font-family: 'Playfair Display', 'Georgia', serif;
+}
+
+.header p {
+    font-size: 1.4rem;
+    opacity: 0.95;
+    position: relative;
+    z-index: 1;
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+
+/* Carousel Section */
+.carousel-section {
+    background: white;
+    padding: 60px 20px;
+    position: relative;
+}
+
+.carousel-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.6s ease-in-out;
+}
+
+.carousel-slide {
+    min-width: 100%;
+    position: relative;
+}
+
+.carousel-slide img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    display: block;
+}
+
+.carousel-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    color: white;
+    padding: 40px 30px 30px;
+}
+
+.carousel-caption h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.carousel-caption p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 10;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.carousel-btn:hover {
+    background: white;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-btn.prev {
+    left: 20px;
+}
+
+.carousel-btn.next {
+    right: 20px;
+}
+
+.carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #f4d4c8;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dot.active {
+    background: #e67e50;
+    transform: scale(1.3);
+}
+
+/* Cards Section */
+.cards-section {
+    padding: 60px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #d4625f;
+    margin-bottom: 50px;
+    font-weight: 400;
+    font-family: 'Playfair Display', 'Georgia', serif;
+    letter-spacing: 1px;
+}
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.activity-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.activity-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.card-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.card-content {
+    padding: 25px;
+}
+
+.card-title {
+    font-size: 1.5rem;
+    color: #d4625f;
+    margin-bottom: 10px;
+    font-weight: 500;
+    font-family: 'Playfair Display', 'Georgia', serif;
+}
+
+.card-preview {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.card-time {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #e67e50;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.learn-more-btn {
+    background: #e67e50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 15px;
+    transition: all 0.3s ease;
+    font-weight: 600;
+}
+
+.learn-more-btn:hover {
+    background: #d4625f;
+    transform: scale(1.05);
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal-content {
+    background: white;
+    margin: 5% auto;
+    padding: 0;
+    width: 90%;
+    max-width: 700px;
+    border-radius: 20px;
+    position: relative;
+    animation: slideIn 0.3s ease;
+    max-height: 85vh;
+    overflow-y: auto;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-image {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 20px 20px 0 0;
+}
+
+.modal-body {
+    padding: 30px;
+}
+
+.modal-title {
+    font-size: 2rem;
+    color: #d4625f;
+    margin-bottom: 20px;
+    font-family: 'Playfair Display', 'Georgia', serif;
+    font-weight: 500;
+}
+
+.modal-details {
+    color: #666;
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+.modal-info {
+    background: #faf8f5;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    color: #4a4a4a;
+}
+
+.info-item:last-child {
+    margin-bottom: 0;
+}
+
+.info-item svg {
+    stroke: #e67e50;
+}
+
+.register-btn {
+    background: linear-gradient(135deg, #e67e50 0%, #d4625f 100%);
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 600;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+.register-btn:hover {
+    transform: scale(1.02);
+    box-shadow: 0 5px 20px rgba(230, 126, 80, 0.3);
+}
+
+.close {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    font-size: 2rem;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.5);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.close:hover {
+    background: rgba(0, 0, 0, 0.7);
+    transform: rotate(90deg);
+}
+
+/* Footer */
+.footer {
+    background: #d4625f;
+    color: white;
+    padding: 30px 20px;
+    text-align: center;
+    margin-top: 60px;
+}
+
+@media (max-width: 768px) {
+    .header h1 {
+        font-size: 1.8rem;
+    }
+
+    .carousel-slide img {
+        height: 300px;
+    }
+
+    .carousel-caption h2 {
+        font-size: 1.5rem;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .cards-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .carousel-btn {
+        width: 40px;
+        height: 40px;
+    }
+}
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Golden Years Senior Center</h1>
+        <p>Where Every Day is an Adventure</p>
+    </div>
+
+    <!-- Carousel Section -->
+    <div class="carousel-section">
+        <div class="carousel-container">
+            <div class="carousel-track">
+                <div class="carousel-slide">
+                    <img src="https://images.unsplash.com/photo-1581579438747-1dc8d17bbce4?w=1200" alt="Seniors socializing">
+                    <div class="carousel-caption">
+                        <h2>Connect & Thrive</h2>
+                        <p>Join our vibrant community of active seniors making lasting friendships</p>
+                    </div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=1200" alt="Fitness class">
+                    <div class="carousel-caption">
+                        <h2>Stay Active & Healthy</h2>
+                        <p>Enjoy our daily fitness classes designed for all ability levels</p>
+                    </div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=1200" alt="Art class">
+                    <div class="carousel-caption">
+                        <h2>Express Your Creativity</h2>
+                        <p>Discover new talents in our art and music programs</p>
+                    </div>
+                </div>
+                <div class="carousel-slide">
+                    <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=1200" alt="Lunch gathering">
+                    <div class="carousel-caption">
+                        <h2>Delicious Meals Together</h2>
+                        <p>Share nutritious meals and great conversation daily</p>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-btn prev">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6b5744" stroke-width="3">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+            </button>
+            <button class="carousel-btn next">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6b5744" stroke-width="3">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+            </button>
+        </div>
+        <div class="carousel-dots"></div>
+    </div>
+
+    <!-- Cards Section -->
+    <div class="cards-section">
+        <h2 class="section-title">Weekly Activities & Programs</h2>
+        <div class="cards-grid">
+
+            <div class="activity-card" data-activity="yoga">
+                <img src="https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?w=400" alt="Chair yoga" class="card-image">
+                <div class="card-content">
+                    <h3 class="card-title">Chair Yoga</h3>
+                    <p class="card-preview">Gentle stretching and breathing exercises designed for all fitness levels. No experience needed!</p>
+                    <div class="card-time">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                        Mon & Wed, 10:00 AM
+                    </div>
+                    <button class="learn-more-btn">Learn More</button>
+                </div>
+            </div>
+
+            <div class="activity-card" data-activity="painting">
+                <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=400" alt="Watercolor painting" class="card-image">
+                <div class="card-content">
+                    <h3 class="card-title">Watercolor Painting</h3>
+                    <p class="card-preview">Explore your artistic side with our talented instructor. All supplies provided!</p>
+                    <div class="card-time">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                        Tuesday, 2:00 PM
+                    </div>
+                    <button class="learn-more-btn">Learn More</button>
+                </div>
+            </div>
+
+            <div class="activity-card" data-activity="bridge">
+                <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=400" alt="Card games" class="card-image">
+                <div class="card-content">
+                    <h3 class="card-title">Bridge & Card Games</h3>
+                    <p class="card-preview">Challenge your mind and make new friends in our weekly card game sessions.</p>
+                    <div class="card-time">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                        Thursday, 1:00 PM
+                    </div>
+                    <button class="learn-more-btn">Learn More</button>
+                </div>
+            </div>
+
+            <div class="activity-card" data-activity="tech">
+                <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400" alt="Technology class" class="card-image">
+                <div class="card-content">
+                    <h3 class="card-title">Tech Help & Training</h3>
+                    <p class="card-preview">Learn to use smartphones, tablets, and video calling. Stay connected with loved ones!</p>
+                    <div class="card-time">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                        Friday, 10:30 AM
+                    </div>
+                    <button class="learn-more-btn">Learn More</button>
+                </div>
+            </div>
+
+            <div class="activity-card" data-activity="dancing">
+                <img src="https://images.unsplash.com/photo-1504609813442-a8924e83f76e?w=400" alt="Dancing" class="card-image">
+                <div class="card-content">
+                    <h3 class="card-title">Line Dancing</h3>
+                    <p class="card-preview">Get moving to your favorite tunes! Fun, low-impact exercise that feels like a party.</p>
+                    <div class="card-time">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                        Wednesday, 3:00 PM
+                    </div>
+                    <button class="learn-more-btn">Learn More</button>
+                </div>
+            </div>
+
+            <div class="activity-card" data-activity="book">
+                <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=400" alt="Book club" class="card-image">
+                <div class="card-content">
+                    <h3 class="card-title">Book Club</h3>
+                    <p class="card-preview">Discuss great literature over coffee and treats. New members always welcome!</p>
+                    <div class="card-time">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                        First Monday, 11:00 AM
+                    </div>
+                    <button class="learn-more-btn">Learn More</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="activityModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <img id="modalImage" class="modal-image" src="" alt="">
+            <div class="modal-body">
+                <h2 id="modalTitle" class="modal-title"></h2>
+                <p id="modalDescription" class="modal-details"></p>
+                <div class="modal-info">
+                    <div class="info-item">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8b7355" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                        <span id="modalTime"></span>
+                    </div>
+                    <div class="info-item">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8b7355" stroke-width="2">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                        <span id="modalLocation"></span>
+                    </div>
+                    <div class="info-item">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8b7355" stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                        <span id="modalInstructor"></span>
+                    </div>
+                    <div class="info-item">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8b7355" stroke-width="2">
+                            <line x1="12" y1="1" x2="12" y2="23"></line>
+                            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                        </svg>
+                        <span id="modalCost"></span>
+                    </div>
+                </div>
+                <button class="register-btn">Register for This Activity</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2024 Golden Years Senior Center | 123 Community Lane | (555) 123-4567</p>
+    </div>
+
+    <script>
+    $(document).ready(function() {
+        // Carousel functionality
+        let currentSlide = 0;
+        const slides = $('.carousel-slide');
+        const totalSlides = slides.length;
+
+        // Create dots
+        for (let i = 0; i < totalSlides; i++) {
+            $('.carousel-dots').append('<div class="dot"></div>');
+        }
+        const dots = $('.dot');
+        dots.eq(0).addClass('active');
+
+        function goToSlide(n) {
+            currentSlide = (n + totalSlides) % totalSlides;
+            $('.carousel-track').css('transform', `translateX(-${currentSlide * 100}%)`);
+            dots.removeClass('active');
+            dots.eq(currentSlide).addClass('active');
+        }
+
+        $('.carousel-btn.next').click(function() {
+            goToSlide(currentSlide + 1);
+        });
+
+        $('.carousel-btn.prev').click(function() {
+            goToSlide(currentSlide - 1);
+        });
+
+        dots.click(function() {
+            goToSlide($(this).index());
+        });
+
+        // Auto-advance carousel
+        setInterval(function() {
+            goToSlide(currentSlide + 1);
+        }, 5000);
+
+        // Activity data
+        const activities = {
+            yoga: {
+                title: 'Chair Yoga',
+                image: 'https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?w=800',
+                description: 'Join us for gentle chair yoga sessions designed specifically for seniors. This low-impact exercise class helps improve flexibility, balance, and strength while reducing stress. Our certified instructor will guide you through breathing exercises and gentle stretches that can be done entirely from a seated position. Perfect for all fitness levels, even those with limited mobility. Each session includes a brief meditation and relaxation period.',
+                time: 'Monday & Wednesday, 10:00 AM - 11:00 AM',
+                location: 'Main Activity Room',
+                instructor: 'Sarah Chen, Certified Yoga Instructor',
+                cost: 'Free for members'
+            },
+            painting: {
+                title: 'Watercolor Painting',
+                image: 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=800',
+                description: 'Discover or rediscover your artistic talents in our weekly watercolor painting class. Whether you\'re a beginner or have painted before, our experienced art instructor will help you create beautiful works of art. All materials are provided including paints, brushes, paper, and easels. Each week features a new subject from landscapes to still life. Take home your masterpieces or display them in our monthly art showcase!',
+                time: 'Tuesday, 2:00 PM - 4:00 PM',
+                location: 'Art Studio',
+                instructor: 'Michael Roberts, Professional Artist',
+                cost: '$5 per session (materials included)'
+            },
+            bridge: {
+                title: 'Bridge & Card Games',
+                image: 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=800',
+                description: 'Exercise your mind and enjoy friendly competition in our weekly card game sessions. We offer bridge lessons for beginners and competitive play for experienced players. Also enjoy other favorites like pinochle, canasta, and poker. Coffee, tea, and light snacks provided. Great way to make new friends and keep your mind sharp. Drop-ins welcome!',
+                time: 'Thursday, 1:00 PM - 4:00 PM',
+                location: 'Game Room',
+                instructor: 'Facilitated by experienced players',
+                cost: 'Free for members'
+            },
+            tech: {
+                title: 'Tech Help & Training',
+                image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800',
+                description: 'Stay connected in today\'s digital world! Learn to use smartphones, tablets, computers, and popular apps like FaceTime, Zoom, email, and social media. Bring your own device and get one-on-one help with specific questions. Topics covered include online safety, downloading apps, video calling with grandchildren, online shopping, and much more. Patient instructors work at your pace in a judgment-free environment.',
+                time: 'Friday, 10:30 AM - 12:00 PM',
+                location: 'Computer Lab',
+                instructor: 'Tech volunteers and staff',
+                cost: 'Free for members'
+            },
+            dancing: {
+                title: 'Line Dancing',
+                image: 'https://images.unsplash.com/photo-1504609813442-a8924e83f76e?w=800',
+                description: 'Get your body moving and have fun doing it! Our line dancing class features classic country, pop, and oldies music. No partner needed - everyone dances together in lines to choreographed steps. This low-impact cardio workout improves coordination, balance, and cardiovascular health while feeling like a party. Beginners learn basic steps, while experienced dancers can enjoy more complex routines. Comfortable shoes recommended!',
+                time: 'Wednesday, 3:00 PM - 4:30 PM',
+                location: 'Main Activity Room',
+                instructor: 'Linda Martinez, Dance Instructor',
+                cost: 'Free for members'
+            },
+            book: {
+                title: 'Book Club',
+                image: 'https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=800',
+                description: 'Join fellow book lovers for lively discussions over coffee and homemade treats. Each month we read and discuss a different book spanning various genres including fiction, mystery, biography, and classics. Books are available in the center\'s library or through our partnership with the local library. Whether you finish the whole book or just a few chapters, all perspectives are welcome. A wonderful way to explore new authors and make lasting friendships!',
+                time: 'First Monday of each month, 11:00 AM - 12:30 PM',
+                location: 'Library Room',
+                instructor: 'Led by member volunteers',
+                cost: 'Free for members'
+            }
+        };
+
+        // Modal functionality
+        const modal = $('#activityModal');
+        const closeBtn = $('.close');
+
+        $('.activity-card').click(function() {
+            const activityType = $(this).data('activity');
+            const activity = activities[activityType];
+
+            $('#modalTitle').text(activity.title);
+            $('#modalImage').attr('src', activity.image);
+            $('#modalDescription').text(activity.description);
+            $('#modalTime').text(activity.time);
+            $('#modalLocation').text(activity.location);
+            $('#modalInstructor').text('Instructor: ' + activity.instructor);
+            $('#modalCost').text(activity.cost);
+
+            modal.fadeIn(300);
+        });
+
+        closeBtn.click(function() {
+            modal.fadeOut(300);
+        });
+
+        $(window).click(function(event) {
+            if (event.target.id === 'activityModal') {
+                modal.fadeOut(300);
+            }
+        });
+
+        $('.register-btn').click(function() {
+            alert('Registration feature coming soon! Please call (555) 123-4567 or visit the front desk to register.');
+        });
+    });
+    </script>
+</body>
+</html>
