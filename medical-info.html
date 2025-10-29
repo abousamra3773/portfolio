@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthPlus - Member Benefits</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+        
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: #f8f9fa;
+    color: #2c3e50;
+    overflow-x: hidden;
+}
+
+.benefitsPage, 
+.page,
+.simpleLayout,
+.benefits,
+section {
+    overflow: visible;
+}
+        
+h2.section-title {
+    display: flex;
+    justify-content: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 23px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    padding: 40px 0 10px;
+    color: #2c5f7f;
+}
+        
+.cards-container {
+    display: flex;
+    overflow-x: auto;
+    gap: 20px;
+    padding: 10px 0;
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: #4a90b5 #e8f4f8;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    width: 100%;
+    margin: 0 auto;
+    max-width: 1350px;
+    overflow: hidden;
+}
+        
+h2.card-title {
+    color: #2c5f7f;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 23px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-family: 'Inter', sans-serif;
+}
+
+.quoteLink {
+    margin: 0 0 16px 0;
+}
+        
+.quoteLink a.quote-link {
+    margin: 0 0 0 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 700; 
+    line-height: 26px;
+    text-decoration: none; 
+    padding: 0;
+    text-transform: uppercase;
+    color: #4a90b5;
+    transition: color 0.3s ease;
+}
+
+.quoteLink a.quote-link:hover {
+    color: #2c5f7f;
+}
+        
+.cards-container::-webkit-scrollbar {
+    height: 0;
+    width: 0;
+    display: none;
+}
+        
+.card {
+    flex: 0 0 320px;
+    scroll-snap-align: start;
+    background: #ffffff;
+    border-radius: 16px;
+    border: 1px solid #e8f4f8;
+    box-shadow: 0 4px 20px rgba(74, 144, 181, 0.08);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    height: 460px;
+    position: relative;
+    transform: translateZ(0);
+    will-change: transform;
+}
+
+.card:hover {
+    border-color: #4a90b5;
+    box-shadow: 0 8px 30px rgba(74, 144, 181, 0.15);
+    transform: translateY(-4px);
+}
+        
+.card.expanded {
+    height: auto;
+    padding-bottom: 10px;
+}
+        
+.card-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+        
+.card-content {
+    padding: 20px;
+    min-height: 200px
+}
+        
+.card-description {
+    font-size: 16px;
+    color: #5a6c7d;
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+        
+.card-expandable {
+    height: 0;
+    overflow: hidden;
+    transition: height 0.3s ease;
+}
+        
+.card.expanded .card-expandable {
+    height: auto;
+    margin-top: 15px;
+}
+
+.navigation-tabs-container {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: #ffffff;
+    width: 100%;
+    box-shadow: 0 2px 10px rgba(74, 144, 181, 0.1);
+    margin: 0;
+    padding: 0;
+    border-bottom: 2px solid #e8f4f8;
+}
+
+.navigation-tabs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 95px;
+    background-color: #ffffff;
+    width: 100%;
+}
+
+.tab:hover, .tab.active {
+   color: #2c5f7f;
+   font-weight: 700;
+   border-bottom: 3px solid #4a90b5;
+}
+
+.tab {
+    padding: 6px 24px;
+    margin: 0 15px;
+    cursor: pointer;
+    font-weight: 400;
+    color: #7a8fa3;
+    transition: all 0.3s ease;
+    display: block !important;
+}
+
+.section-title {
+    text-align: center;
+    padding: 20px 0;
+    font-size: 28px;
+    color: #2c5f7f;
+}
+
+.back-to-top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    background: linear-gradient(135deg, #4a90b5 0%, #2c5f7f 100%);
+    color: white;
+    border: none;
+    border-radius: 32px;
+    padding: 10px 26px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 0 auto 34px;
+    box-shadow: 0 4px 15px rgba(74, 144, 181, 0.3);
+    transition: all 0.3s ease;
+    gap: 8px;
+}
+
+.back-to-top:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(74, 144, 181, 0.4);
+}
+
+.section {
+    padding: 10px 20px 30px;
+}
+
+.cards-navigation {
+    position: relative;
+    width: 100%;
+    padding: 0 50px;
+    max-width: 1500px;
+    margin: 0 auto;
+}
+
+.nav-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-100%);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.95);
+    border: 2px solid #4a90b5;
+    box-shadow: 0 4px 15px rgba(74, 144, 181, 0.2);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: all 0.3s ease;
+}
+
+.nav-arrow:hover {
+    background: #4a90b5;
+    box-shadow: 0 6px 25px rgba(74, 144, 181, 0.4);
+    transform: translateY(-100%) scale(1.1);
+}
+
+.nav-arrow:hover svg {
+    stroke: white;
+}
+
+.nav-arrow svg {
+    stroke: #4a90b5;
+    transition: stroke 0.3s ease;
+}
+
+.nav-prev {
+    left: 5px;
+}
+
+.nav-next {
+    right: 5px;
+}
+
+p.card-description, .card-expandable p {
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 28px;
+    color: #5a6c7d;
+}
+
+.benefitsPage .read-more {
+    display: inline;
+    color: #4a90b5;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    position: static;
+    font-size: 18px;
+    transition: color 0.3s ease;
+}
+
+.read-more:hover {
+    color: #2c5f7f;
+}
+
+.read-less {
+    display: inline;
+    color: #4a90b5;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.read-less:hover {
+    color: #2c5f7f;
+}
+
+.card {
+    position: relative;
+}
+
+.gray-line {
+    width: 320px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #4a90b5, transparent);
+    margin: 10px 0;
+    opacity: 0.3;
+}
+
+.topContainer {
+    background: linear-gradient(135deg, rgba(74, 144, 181, 0.9) 0%, rgba(44, 95, 127, 0.9) 100%), 
+                url('https://images.unsplash.com/photo-1631815588090-d4bfec5b1ccb?w=1200') center/cover;
+    padding: 100px 20px;
+    text-align: center;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.topContainer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 30% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 60%);
+}
+
+.topContainer h1 {
+    font-size: 2.8rem;
+    margin-bottom: 20px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    position: relative;
+    z-index: 1;
+}
+
+.topContainer p {
+    font-size: 1.3rem;
+    position: relative;
+    z-index: 1;
+    opacity: 0.95;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+@media screen and (max-width: 768px) {
+    .nav-arrow {
+        width: 36px;
+        height: 36px;
+    }
+  
+    .cards-navigation {
+        padding: 0 1.8rem;
+    }
+  
+    .nav-prev {
+        left: 4px;
+    }
+  
+    .nav-next {
+        right: 4px;
+    }
+
+    .card {
+        flex: 0 0 320px; 
+    }
+
+    .topContainer h1 {
+        font-size: 1.8rem !important;
+    }
+
+    .tab {
+        font-size: .8rem;
+        padding: .1rem;
+        margin: .5rem;
+        text-align: center;
+    }
+
+    .navigation-tabs {
+        padding: 0 5px;
+    }
+}
+
+@media (max-width: 480px) {
+    .card {
+        flex: 0 0 85vw;
+        max-width: 100%;
+    }
+
+    .card-image {
+        width: 100%;
+        height: unset;
+        object-fit: cover;
+    }
+
+    .cards-container {
+        gap: 10px;
+    }
+
+    .card-content {
+        padding: 10px 22px 10px;
+    }
+
+    h2.card-title {
+        font-size: .96rem;
+        letter-spacing: .6px;
+        text-align: center;
+    }
+
+    h2.section-title {
+        font-size: 18px;
+        letter-spacing: 4px;
+        padding: 30px 0 10px;
+        text-align: center;
+    }
+
+    .nav-arrow {
+        width: 32px;
+        height: 32px;
+        transform: translateY(-200%);
+    }
+
+    p.card-description, .card-expandable p {
+        font-size: 16px;
+    }
+
+    .benefitsPage .read-more {
+        font-size: 16px;
+    }
+}
+
+@media screen and (min-width: 1550px) {
+    .nav-arrow {
+        width: 60px !important;
+        height: 60px !important;
+    }
+
+    .card {
+        flex: 0 0 375px;
+    }
+
+    .cards-container {
+        max-width: 1450px;
+    }
+
+    .cards-navigation {
+        max-width: 1650px;
+    }
+}
+    </style>
+</head>
+<body class="benefitsPage">
+    <section class="topContainer">
+        <h1>YOUR HEALTH & WELLNESS JOURNEY</h1>
+        <p>Comprehensive benefits designed to support your physical, mental, and emotional wellbeing at every stage of life.</p>
+    </section>
+
+    <div class="navigation-tabs-container">
+        <div id="top" class="navigation-tabs">
+            <div class="tab active" data-target="medical-care">Medical Care</div>
+            <div class="tab" data-target="wellness">Wellness & Prevention</div>
+            <div class="tab" data-target="family">Family Support</div>
+        </div>
+    </div>
+
+    <!-- Section 1: Medical Care -->
+    <div id="medical-care" class="section">
+        <h2 class="section-title">Medical Care</h2>
+        <div class="cards-navigation">
+            <div class="cards-container">
+                
+                <!-- Card 1 -->
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=400" alt="Doctor consultation" class="card-image" /> 
+                    <div class="card-content">
+                        <h2 class="card-title">24/7 VIRTUAL CARE</h2>
+                        <p class="card-description">Connect with board-certified physicians anytime, anywhere through video, phone, or chat...<a class="read-more">Read More</a></p>
+                        <div class="card-expandable">
+                            <p>Get diagnoses, prescriptions, and treatment plans from the comfort of home. No appointment necessary. Average wait time under 10 minutes. Unlimited visits included with membership.</p>
+                        </div>
+                    </div>
+                    <div class="quoteLink">
+                        <a href="#" class="quote-link">Start Visit →</a>
+                    </div>
+                    <div class="gray-line"></div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1585435557343-3b092031a831?w=400" alt="Prescription" class="card-image">
+                    <div class="card-content">
+                        <h2 class="card-title">PRESCRIPTION SAVINGS</h2>
+                        <p class="card-description">Save up to 80% on prescription medications with our pharmacy network...<a class="read-more">Read More</a></p>
+                        <div class="card-expandable">
+                            <p>Access generic and brand-name medications at discounted rates. Free home delivery on 90-day supplies. Easy prescription transfer and automatic refills available.</p>
+                        </div>
+                    </div>
+                    <div class="quoteLink">
+                        <a href="#" class="quote-link">Find Savings →</a>
+                    </div>
+                    <div class="gray-line"></div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1559757175-5700dde675bc?w=400" alt="Specialist care" class="card-image">
+                    <div class="card-content">
+                        <h2 class="card-title">SPECIALIST NETWORK</h2>
+                        <p class="card-description">Access to over 50,000 specialists nationwide with priority scheduling for members...<a class="read-more">Read More</a></p>
+                        <div class="card-expandable">
+                            <p>Coordinated care across cardiology, orthopedics, dermatology, and more. Second opinion services and care navigation support included. Reduced wait times for appointments.</p>
+                        </div>
+                    </div>
+                    <div class="quoteLink">
+                        <a href="#" class="quote-link">Find Specialist →</a>
+                    </div>
+                    <div class="gray-line"></div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1516549655169-df83a0774514?w=400" alt="Dental care" class="card-image">
+                    <div class="card-content">
+                        <h2 class="card-title">COMPREHENSIVE DENTAL</h2>
+                        <p class="card-description">Full dental coverage including preventive, restorative, and cosmetic procedures...<a class="read-more">Read More</a></p>
+                        <div class="card-expandable">
+                            <p>Two cleanings per year at no cost. Coverage for fillings, crowns, root canals, and orthodontics. Access to a nationwide network of dental providers.</p>
+                        </div>
+                    </div>
+                    <div class="quoteLink">
+                        <a href="#" class="quote-link">Find Dentist →</a>
+                    </div>
+                    <div class="gray-line"></div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400" alt="Vision care" class="card-image">
+                    <div class="card-content">
+                        <h2 class="card-title">VISION CARE BENEFITS</h2>
+                        <p class="card-description">Annual eye exams, glasses, and contact lenses covered. Discounts on LASIK surgery...<a class="read-more">Read More</a></p>
+                        <div class="card-expandable">
+                            <p>Choose from thousands of frames and lens options. Coverage for prescription sunglasses. Online ordering available with virtual try-on technology.</p>
+                        </div>
+                    </div>
+                    <div class="quoteLink">
+                        <a href="#" class="quote-link">Schedule Exam →</a>
+                    </div>
+                    <div class="gray-line"></div>
+                </div>
+
+            </div>
+
+            <button class="nav-arrow nav-prev">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+            </button>
+            <button class="nav-arrow nav-next">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Section 2: Wellness & Prevention -->
+    <div id="wellness" class="section">
+        <h2 class="section-title">Wellness & Prevention</h2>
+        <div class="cards-navigation">
+            <div class="cards-container">
+                
+                <!-- Card 1 -->
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400" alt="Fitness training" class="card-image" /> 
+                    <div class="card-content">
+                        <h2 class="card-title">FITNESS & GYM ACCESS</h2>
+                        <p class="card-description">Complimentary membership to 10,000+ gyms, fitness centers, and wellness facilities nationwide...<a class="read-more">Read More</a></p>
+                        <div class="card-expandable">
+                            <p>Includes virtual fitness classes, personal training sessions, and wellness workshops. Track your progress with our mobile app and earn rewards for staying active.</p>
+                        </div>
+                    </div>
+                    <div class="quoteLink">
+                        <a href="#" class="quote-link">Activate Membership →</a>
+                    </div>
+                    <div class="gray-line"></div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400" alt="Mental health support" class="card-image">
+                    <div class="card-content">
+                        <h2 class="card-title">MENTAL HEALTH SUPPORT</h2>
+                        <p class="card-description">Access to licensed therapists and counselors for individual, couples, and family therapy...<a class="read-more">Read More</a></p>
+                        <div class="card-expandable">
+                            <p>Virtual or in-person sessions available. Specialized support for anxiety, depression, stress management, and life transitions. Confidential and judgment-free care.</p>
+                        </div>
+                    </div>
+                    <div class="quoteLink">
+                        <a href="#" class="quote-link">Find Therapist →</a>
+                    </div>
+                    <div class="gray-line"></div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=400" alt="Nutrition counseling" class="card-image">
+                    <div class="card-content">
+                        <h2 class="card-title">NUTRITION COUNSELING</h2>
+                        <p class="card-description">One-on-one consultations with registered dietitians to help you reach your health goals...<a class="read-more">Read More</a></p>
+                        <div class="card-expandable">
+                            <p>Personalized meal plans, grocery guides, and recipe recommendations. Specialized programs for weight management, diabetes, heart health, and more.</p>
+                        </div>
+                    </div>
+                    <div class="quoteLink">
+                        <a href="#" class="quote-link">Book Session →</a>
+                    </div>
+                    <div class="gray-line"></div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400" alt="Sleep therapy" class="card-image">
+                    <div class="card-content">
+                        <h2 class="card-title">SLEEP HEALTH PROGRAM</h2>
+                        <p class="card-description">Comprehensive sleep assessments and treatment for insomnia and sleep disorders...<a class="read-more">Read More</a></p>
+                        <div class="card-expandable">
+                            <p>At-home sleep studies, cognitive behavioral therapy for insomnia, and CPAP equipment coverage. Sleep coaching and relaxation techniques included.</p>
+                        </div>
+                    </div>
+                    <div class="quoteLink">
+                        <a href="#" class="quote-link">Learn More →</a>
+                    </div>
+                    <div class="gray-line"></div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400" alt="Preventive screenings" class="card-image">
+                    <div class="card-content">
+                        <h2 class="card-title">PREVENTIVE SCREENINGS</h2>
+                        <p class="card-description">Annual health screenings and wellness checkups at no additional cost...<a class="read-more">Read More</a></p>
+                        <div class="card-expandable">
+                            <p>Includes blood work, cancer screenings, cardiovascular assessments, and immunizations. Early detection programs for chronic conditions with personalized health plans.</p>
+                        </div>
+                    </div>
+                    <div class="quoteLink">
+                        <a href="#" class="quote-link">Schedule Screening →</a>
+                    </div>
+                    <div class="gray-line"></div>
+                </div>
+
+            </div>
+
+            <button class="nav-arrow nav-prev">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+            </button>
+            <button class="nav-arrow nav-next">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Section 3: Family Support -->
+    <div id="family" class="section">
+        <h2 class="section-title">Family Support</h2>
+        <div class="cards-navigation">
+            <div class="cards-container">
+                
+                <!-- Card 1 -->
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=400" alt="Maternity care" class="card-image" /> 
+                    <div class="card-content">
+                        <h2 class="card-title">MATERNITY & NEWBORN CARE</h2>
+                        <p class="card-description">Comprehensive prenatal, delivery, and postnatal care for expecting mothers...<a class="read-more">Read More</a></p>
+                        <div class="card-expandable">
+                            <p>Includes lactation consulting, postpartum support, and well-baby visits. Access to birthing classes and parenting resources. Breast pump coverage included.</p>
+                        </div>
+                    </div>
+                    <div class="quoteLink">
+                        <a href="#" class="quote-link">Explore Services →</a>
+                    </div>
+                    <div class="gray-line"></div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=400" alt="Pediatric care" class="card-image">
+                    <div class="card-content">
+                        <h2 class="card-title">PEDIATRIC CARE</h2>
+                        <p class="card-description">Dedicated pediatricians and specialists for children from newborn through adolescence...<a class="read-more">Read More</a></p>
+                        <div class="card-expandable">
+                            <p>Well-child visits, immunizations, and sick care. Developmental screenings and behavioral health support. 24/7 nurse advice line for parents.</p>
+                        </div>
+                    </div>
+                    <div class="quoteLink">
+                        <a href="#" class="quote-link">Find Pediatrician →</a>
+                    </div>
+                    <div class="gray-line"></div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1581579438747-1dc8d17bbce4?w=400" alt="Elder care" class="card-image">
+                    <div class="card-content">
+                        <h2 class="card-title">SENIOR CARE SUPPORT</h2>
+                        <p class="card-description">Specialized care coordination and resources for aging family members...<a class="read-more">Read More</a></p>
+                        <div class="card-expandable">
+                            <p>Help navigating Medicare, finding in-home care, and assisted living facilities. Chronic disease management and medication review services included.</p>
+                        </div>
+                    </div>
+                    <div class="quoteLink">
+                        <a href="#" class="quote-link">Get Support →</a>
+                    </div>
+                    <div class="gray-line"></div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=400" alt="Family therapy" class="card-image">
+                    <div class="card-content">
+                        <h2 class="card-title">FAMILY COUNSELING</h2>
+                        <p class="card-description">Strengthen family relationships with professional counseling and mediation services...<a class="read-more">Read More</a></p>
+                        <div class="card-expandable">
+                            <p>Address communication challenges, life transitions, and family dynamics. Teen counseling and parent coaching available. Virtual and in-person options.</p>
+                        </div>
+                    </div>
+                    <div class="quoteLink">
+                        <a href="#" class="quote-link">Schedule Session →</a>
+                    </div>
+                    <div class="gray-line"></div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400" alt="Fertility services" class="card-image">
+                    <div class="card-content">
+                        <h2 class="card-title">FERTILITY SERVICES</h2>
+                        <p class="card-description">Comprehensive fertility evaluation, treatment, and family planning support...<a class="read-more">Read More</a></p>
+                        <div class="card-expandable">
+                            <p>Coverage for fertility testing, IVF, IUI, and adoption assistance. Access to reproductive endocrinologists and fertility specialists. Emotional support and counseling included.</p>
+                        </div>
+                    </div>
+                    <div class="quoteLink">
+                        <a href="#" class="quote-link">Learn More →</a>
+                    </div>
+                    <div class="gray-line"></div>
+                </div>
+
+            </div>
+
+            <button class="nav-arrow nav-prev">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+            </button>
+            <button class="nav-arrow nav-next">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Back to Top Button - ONLY AT THE VERY BOTTOM -->
+    <button class="back-to-top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="18" viewBox="0 0 20 18" fill="none">
+            <path d="M19.21 9.49492L10 0.294922L0.790039 9.49492L2.21004 10.9149L9.00004 4.11492V17.7049H11V4.11492L17.79 10.9149L19.21 9.49492Z" fill="white"/>
+        </svg>
+        Back to top
+    </button>
+
+    <script>
+    jQuery(document).ready(function($) {
+        
+        // Tab navigation - smooth scroll to sections
+        $('.tab').on('click', function() {
+            const targetId = $(this).data('target');
+            const targetElement = $('#' + targetId);
+            
+            // Remove active class from all tabs
+            $('.tab').removeClass('active');
+            // Add active class to clicked tab
+            $(this).addClass('active');
+            
+            // Smooth scroll to the target section
+            $('html, body').animate({
+                scrollTop: targetElement.offset().top - 100 // Offset for sticky header
+            }, 800);
+        });
+
+        // Back to top button
+        $('.back-to-top').on('click', function() {
+            $('html, body').animate({
+                scrollTop: 0
+            }, 800);
+        });
+
+        // Read More/Less functionality
+        $('.read-more').on('click', function(e) {
+            e.preventDefault();
+            
+            let card = $(this).closest('.card');
+            let expandableContent = card.find('.card-expandable');
+            
+            // Expand the card
+            card.addClass('expanded');
+            
+            // Show the expandable content
+            expandableContent.slideDown(300);
+            
+            // Hide the Read More link
+            $(this).hide();
+            
+            // Add Read Less link if it doesn't exist
+            if (expandableContent.find('.read-less').length === 0) {
+                expandableContent.find('p:last').append(' <a href="#" class="read-less">Read Less</a>');
+                
+                // Add click handler to the new Read Less link
+                expandableContent.find('.read-less').on('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Hide expandable content
+                    expandableContent.slideUp(300, function() {
+                        card.find('.read-more').show();
+                    });
+                    
+                    // Remove expanded class from card
+                    card.removeClass('expanded');
+                    
+                    // Remove this Read Less link
+                    $(this).remove();
+                    
+                    // Scroll back to the top of the card
+                    card[0].scrollIntoView({behavior: 'smooth', block: 'nearest'});
+                });
+            }
+        });
+
+        // Arrow scroll functionality
+        function getCardWidth() {
+            const card = $('.card').first();
+            return card.outerWidth(true);
+        }
+
+        function scrollCards(direction, container) {
+            const containerWidth = container.width();
+            const cardWidth = getCardWidth();
+            const visibleCards = Math.floor(containerWidth / cardWidth);
+            const scrollByPage = (visibleCards >= 2);
+            
+            let scrollAmount;
+            if (scrollByPage) {
+                scrollAmount = direction === 'prev' ? 
+                    -(cardWidth * (visibleCards - 1)) : 
+                    (cardWidth * (visibleCards - 1));
+            } else {
+                scrollAmount = direction === 'prev' ? -cardWidth : cardWidth;
+            }
+            
+            const currentScroll = container.scrollLeft();
+            
+            container.animate({
+                scrollLeft: currentScroll + scrollAmount
+            }, {
+                duration: 400,
+                easing: 'swing',
+                complete: function() {
+                    updateArrowVisibility(container);
+                }
+            });
+        }
+
+        function updateArrowVisibility(container) {
+            const maxScrollLeft = container[0].scrollWidth - container[0].clientWidth;
+            const currentScrollLeft = container.scrollLeft();
+            
+            const prevArrow = container.parent().find('.nav-prev');
+            const nextArrow = container.parent().find('.nav-next');
+            
+            const startThreshold = 10;
+            const endThreshold = 10;
+            
+            if (currentScrollLeft <= startThreshold) {
+                prevArrow.css({
+                    'opacity': '0.5',
+                    'pointer-events': 'none'
+                });
+            } else {
+                prevArrow.css({
+                    'opacity': '1',
+                    'pointer-events': 'auto'
+                });
+            }
+            
+            if (currentScrollLeft >= maxScrollLeft - endThreshold) {
+                nextArrow.css({
+                    'opacity': '0.5',
+                    'pointer-events': 'none'
+                });
+            } else {
+                nextArrow.css({
+                    'opacity': '1',
+                    'pointer-events': 'auto'
+                });
+            }
+        }
+
+        // Initialize arrow visibility for all containers
+        $('.cards-container').each(function() {
+            updateArrowVisibility($(this));
+        });
+
+        // Click handlers for arrows
+        let isScrolling = false;
+
+        $('.nav-prev').on('click', function() {
+            if (isScrolling) return;
+            
+            isScrolling = true;
+            const container = $(this).closest('.cards-navigation').find('.cards-container');
+            scrollCards('prev', container);
+            
+            setTimeout(function() {
+                isScrolling = false;
+            }, 450);
+        });
+
+        $('.nav-next').on('click', function() {
+            if (isScrolling) return;
+            
+            isScrolling = true;
+            const container = $(this).closest('.cards-navigation').find('.cards-container');
+            scrollCards('next', container);
+            
+            setTimeout(function() {
+                isScrolling = false;
+            }, 450);
+        });
+
+        // Update arrow visibility on resize
+        let resizeTimer;
+        $(window).on('resize', function() {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(function() {
+                $('.cards-container').each(function() {
+                    updateArrowVisibility($(this));
+                });
+            }, 150);
+        });
+
+        // Update arrow visibility when scrolling manually
+        let scrollTimer;
+        $('.cards-container').on('scroll', function() {
+            clearTimeout(scrollTimer);
+            scrollTimer = setTimeout(function() {
+                updateArrowVisibility($(this));
+            }.bind(this), 100);
+        });
+
+        // Touch swipe support for mobile
+        $('.cards-container').on('touchstart', function(e) {
+            const startX = e.originalEvent.touches[0].pageX;
+            let touchMoved = false;
+
+            $(this).on('touchmove', function(e) {
+                touchMoved = true;
+            });
+
+            $(this).on('touchend', function(e) {
+                const endX = e.originalEvent.changedTouches[0].pageX;
+                const container = $(this);
+                
+                if (touchMoved && Math.abs(startX - endX) > 50) {
+                    if (startX > endX) {
+                        scrollCards('next', container);
+                    } else {
+                        scrollCards('prev', container);
+                    }
+                }
+                
+                $(this).off('touchmove touchend');
+                touchMoved = false;
+            });
+        });
+
+    });
+    </script>
+</body>
+</html>
