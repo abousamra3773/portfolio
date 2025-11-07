@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Study: From Design to Code</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f7fa;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+        
+        .section {
+            background: white;
+            border-radius: 16px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .section h2 {
+            color: #667eea;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid #667eea;
+        }
+        
+        /* Process Steps */
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .step {
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 12px;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .step:hover {
+            transform: translateY(-5px);
+        }
+        
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: #667eea;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto 1rem;
+        }
+        
+        .step h3 {
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+        
+        .step p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        /* Split View */
+        .split-view {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .view-panel {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 1.5rem;
+            min-height: 400px;
+        }
+        
+        .view-panel h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .view-panel h3::before {
+            content: '🎨';
+            font-size: 1.5rem;
+        }
+        
+        .view-panel:last-child h3::before {
+            content: '💻';
+        }
+        
+        .figma-placeholder {
+            background: white;
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-style: italic;
+        }
+        
+        .live-demo {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 2rem;
+            min-height: 300px;
+        }
+        
+        /* Code Comparison Tabs */
+        .code-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        
+        .tab {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #666;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+            position: relative;
+            bottom: -2px;
+        }
+        
+        .tab:hover {
+            color: #667eea;
+        }
+        
+        .tab.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+        }
+        
+        .code-content {
+            display: none;
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 2rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        .code-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .code-content pre {
+            margin: 0;
+            white-space: pre-wrap;
+        }
+        
+        /* Metrics Grid */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .metric-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        .metric-value {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .metric-label {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        
+        /* Challenge/Solution */
+        .challenge-solution {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .challenge, .solution {
+            padding: 2rem;
+            border-radius: 12px;
+        }
+        
+        .challenge {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+        }
+        
+        .challenge h3 {
+            color: #ff9800;
+            margin-bottom: 1rem;
+        }
+        
+        .solution {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+        }
+        
+        .solution h3 {
+            color: #4caf50;
+            margin-bottom: 1rem;
+        }
+        
+        /* Tech Stack */
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .tech-tag {
+            background: #667eea;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .split-view,
+            .challenge-solution {
+                grid-template-columns: 1fr;
+            }
+            
+            .process-steps {
+                grid-template-columns: 1fr;
+            }
+            
+            header h1 {
+                font-size: 2rem;
+            }
+            
+            .section {
+                padding: 2rem 1.5rem;
+            }
+        }
+        
+        /* Demo Component Styles */
+        .demo-nav {
+            background: #2c3e50;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .demo-nav .logo {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .demo-nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .demo-nav a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .demo-nav a:hover {
+            color: #3498db;
+        }
+        
+        .demo-button {
+            background: #3498db;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .demo-button:hover {
+            background: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Case Study: Modern Navigation Component</h1>
+        <p>From Figma Design to Production-Ready Code</p>
+    </header>
+    
+    <div class="container">
+        <!-- Project Overview -->
+        <section class="section">
+            <h2>Project Overview</h2>
+            <p style="font-size: 1.1rem; color: #555; margin-bottom: 1.5rem;">
+                Create a fully responsive, accessible navigation component that works seamlessly across all devices and browsers. The component needed to be lightweight, performant, and easy to maintain.
+            </p>
+            
+            <h3 style="color: #333; margin: 2rem 0 1rem;">Tech Stack</h3>
+            <div class="tech-stack">
+                <span class="tech-tag">HTML5</span>
+                <span class="tech-tag">CSS3</span>
+                <span class="tech-tag">JavaScript</span>
+                <span class="tech-tag">jQuery</span>
+                <span class="tech-tag">React</span>
+                <span class="tech-tag">Responsive Design</span>
+                <span class="tech-tag">WCAG 2.1</span>
+            </div>
+        </section>
+        
+        <!-- Process Steps -->
+        <section class="section">
+            <h2>Development Process</h2>
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Requirements</h3>
+                    <p>Gathered requirements and defined user stories</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Design</h3>
+                    <p>Created mockups in Figma with design system</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Prototype</h3>
+                    <p>Built HTML/CSS structure and interactions</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Testing</h3>
+                    <p>Cross-browser testing and accessibility audit</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <h3>Optimize</h3>
+                    <p>Performance optimization and refinement</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Design to Code Split View -->
+        <section class="section">
+            <h2>Design to Code</h2>
+            <div class="split-view">
+                <div class="view-panel">
+                    <h3>Figma Design</h3>
+                    <div class="figma-placeholder">
+                        Insert Figma embed or screenshot here
+                    </div>
+                    <p style="margin-top: 1rem; color: #666;">
+                        <strong>Design Notes:</strong> Clean, modern aesthetic with focus on usability. Mobile-first approach with smooth transitions.
+                    </p>
+                </div>
+                <div class="view-panel">
+                    <h3>Live Implementation</h3>
+                    <div class="live-demo">
+                        <nav class="demo-nav">
+                            <div class="logo">Brand</div>
+                            <ul>
+                                <li><a href="#home">Home</a></li>
+                                <li><a href="#about">About</a></li>
+                                <li><a href="#services">Services</a></li>
+                                <li><a href="#contact">Contact</a></li>
+                            </ul>
+                            <button class="demo-button">Get Started</button>
+                        </nav>
+                    </div>
+                    <p style="margin-top: 1rem; color: #666;">
+                        <strong>Implementation Notes:</strong> Semantic HTML, CSS Grid for layout, smooth hover transitions, fully responsive.
+                    </p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Code Comparison -->
+        <section class="section">
+            <h2>Code Implementation Approaches</h2>
+            <p style="color: #666; margin-bottom: 1.5rem;">
+                Explore different implementation methods and compare their pros/cons
+            </p>
+            
+            <div class="code-tabs">
+                <button class="tab active" onclick="showCode('vanilla')">Vanilla JavaScript</button>
+                <button class="tab" onclick="showCode('jquery')">jQuery</button>
+                <button class="tab" onclick="showCode('react')">React</button>
+            </div>
+            
+            <div id="vanilla" class="code-content active">
+                <pre><code>// Vanilla JavaScript Implementation
+const nav = document.querySelector('.navbar');
+const menuToggle = document.querySelector('.menu-toggle');
+
+menuToggle.addEventListener('click', () => {
+  nav.classList.toggle('active');
+});
+
+// Close menu on outside click
+document.addEventListener('click', (e) => {
+  if (!nav.contains(e.target) && !menuToggle.contains(e.target)) {
+    nav.classList.remove('active');
+  }
+});
+
+// Pros: No dependencies, best performance, modern approach
+// Cons: More verbose, requires polyfills for older browsers</code></pre>
+            </div>
+            
+            <div id="jquery" class="code-content">
+                <pre><code>// jQuery Implementation
+$('.menu-toggle').on('click', function() {
+  $('.navbar').toggleClass('active');
+  $(this).toggleClass('open');
+});
+
+$(document).on('click', function(e) {
+  if (!$(e.target).closest('.navbar, .menu-toggle').length) {
+    $('.navbar').removeClass('active');
+    $('.menu-toggle').removeClass('open');
+  }
+});
+
+// Pros: Concise syntax, great browser compatibility, familiar
+// Cons: Extra dependency, slightly larger bundle size</code></pre>
+            </div>
+            
+            <div id="react" class="code-content">
+                <pre><code>// React Component Implementation
+import { useState } from 'react';
+
+function Navigation() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    &lt;nav className={`navbar ${isOpen ? 'active' : ''}`}&gt;
+      &lt;button onClick={() => setIsOpen(!isOpen)}&gt;
+        Menu
+      &lt;/button&gt;
+      &lt;ul className="nav-links"&gt;
+        &lt;li&gt;&lt;a href="#home"&gt;Home&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="#about"&gt;About&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/nav&gt;
+  );
+}
+
+// Pros: State management, reusable, modern framework
+// Cons: Requires React ecosystem, steeper learning curve</code></pre>
+            </div>
+        </section>
+        
+        <!-- Challenges & Solutions -->
+        <section class="section">
+            <h2>Challenges & Solutions</h2>
+            <div class="challenge-solution">
+                <div class="challenge">
+                    <h3>🚧 Challenge</h3>
+                    <p><strong>Cross-browser menu animations:</strong> Safari had issues with CSS transforms during menu transitions, causing flickering effects.</p>
+                    <p style="margin-top: 1rem;"><strong>Accessibility concerns:</strong> Screen readers weren't properly announcing menu state changes.</p>
+                </div>
+                <div class="solution">
+                    <h3>✅ Solution</h3>
+                    <p><strong>Browser compatibility:</strong> Added -webkit-transform prefixes and used will-change CSS property to improve rendering performance.</p>
+                    <p style="margin-top: 1rem;"><strong>Accessibility:</strong> Implemented ARIA labels, focus management, and keyboard navigation (Tab, Escape keys).</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Results/Metrics -->
+        <section class="section">
+            <h2>Results & Performance Metrics</h2>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-value">98</div>
+                    <div class="metric-label">Lighthouse Performance</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">100</div>
+                    <div class="metric-label">Accessibility Score</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">< 50ms</div>
+                    <div class="metric-label">Time to Interactive</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">12KB</div>
+                    <div class="metric-label">Total Bundle Size</div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Key Learnings -->
+        <section class="section">
+            <h2>Key Takeaways</h2>
+            <ul style="list-style: none; padding: 0;">
+                <li style="padding: 1rem; background: #f8f9fa; margin-bottom: 1rem; border-radius: 8px; border-left: 4px solid #667eea;">
+                    <strong>Mobile-first approach</strong> led to cleaner, more maintainable code and better performance on all devices.
+                </li>
+                <li style="padding: 1rem; background: #f8f9fa; margin-bottom: 1rem; border-radius: 8px; border-left: 4px solid #667eea;">
+                    <strong>Accessibility testing early</strong> prevented major refactoring later in the development process.
+                </li>
+                <li style="padding: 1rem; background: #f8f9fa; margin-bottom: 1rem; border-radius: 8px; border-left: 4px solid #667eea;">
+                    <strong>CSS Grid and Flexbox</strong> combination provided the most flexible and responsive layout solution.
+                </li>
+                <li style="padding: 1rem; background: #f8f9fa; margin-bottom: 1rem; border-radius: 8px; border-left: 4px solid #667eea;">
+                    <strong>Progressive enhancement</strong> ensured the component worked even when JavaScript failed to load.
+                </li>
+            </ul>
+        </section>
+    </div>
+    
+    <script>
+        function showCode(framework) {
+            // Hide all code blocks
+            document.querySelectorAll('.code-content').forEach(block => {
+                block.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected code block
+            document.getElementById(framework).classList.add('active');
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
