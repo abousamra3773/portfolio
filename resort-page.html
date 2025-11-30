@@ -99,10 +99,11 @@
 
         /* Resorts Container */
         .resorts-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            display: flex;
             gap: 30px;
             margin-bottom: 60px;
+            padding: 1rem;
+            justify-content: center;
         }
 
         /* Scroll hint for mobile */
@@ -137,6 +138,7 @@
             overflow: hidden;
             box-shadow: var(--shadow);
             transition: var(--transition);
+            width:400px;
         }
 
         .resort-card:hover {
