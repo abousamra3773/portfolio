@@ -469,7 +469,7 @@
                     <div class="button-container">
                         <a href="#" class="watch-video-btn">
                             <i class="fas fa-play"></i>
-                            <span>Watch Video</span>
+                            <span>See Details</span>
                         </a>
                     </div>
                 </div>
@@ -491,7 +491,7 @@
                     <div class="button-container">
                         <a href="#" class="watch-video-btn">
                             <i class="fas fa-play"></i>
-                            <span>Watch Video</span>
+                            <span>See Details</span>
                         </a>
                     </div>
                 </div>
@@ -513,7 +513,7 @@
                     <div class="button-container">
                         <a href="#" class="watch-video-btn">
                             <i class="fas fa-play"></i>
-                            <span>Watch Video</span>
+                            <span>See Details</span>
                         </a>
                     </div>
                 </div>
@@ -579,14 +579,14 @@
             });
 
             // Watch Video button click
-            $('.watch-video-btn').on('click', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                const card = $(this).closest('.resort-card');
-                const videoId = card.data('video-id');
-                const resortName = card.find('h2').text();
-                openVideoModal(videoId, resortName);
-            });
+            // $('.watch-video-btn').on('click', function(e) {
+            //     e.preventDefault();
+            //     e.stopPropagation();
+            //     const card = $(this).closest('.resort-card');
+            //     const videoId = card.data('video-id');
+            //     const resortName = card.find('h2').text();
+            //     openVideoModal(videoId, resortName);
+            // });
 
             // Close modal
             $('.close-btn').on('click', function() {
