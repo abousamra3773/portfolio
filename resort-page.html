@@ -127,6 +127,68 @@
             font-weight: 300;
         }
 
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .hero-btn {
+            display: inline-block;
+            padding: 14px 32px;
+            font-size: 1rem;
+            font-weight: 500;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .hero-btn.primary-btn {
+            background-color: var(--secondary-color);
+            color: #fff;
+            border: 2px solid var(--secondary-color);
+        }
+
+        .hero-btn.primary-btn:hover {
+            background-color: #e09300;
+            border-color: #e09300;
+            transform: translateY(-2px);
+        }
+
+        .hero-btn.secondary-btn {
+            background-color: transparent;
+            color: #fff;
+            border: 2px solid #fff;
+        }
+
+        .hero-btn.secondary-btn:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .curated-section {
+            text-align: center;
+            padding: 0 20px;
+            margin-bottom: 30px;
+        }
+
+        .curated-section .section-title {
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .section-tagline {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
         /* Sections */
         section {
             padding: 60px 0;
@@ -509,11 +571,19 @@
         <div class="container">
             <h1>Luxury Resort Destinations</h1>
             <p>Experience the world's most exclusive getaways</p>
+            <div class="hero-buttons">
+                <a href="#destinations" class="hero-btn primary-btn">Explore Collection</a>
+                <a href="#contact" class="hero-btn secondary-btn">Plan Your Trip</a>
+            </div>
         </div>
     </header>
 
     <main>
         <section id="destinations">
+        <div class="curated-section">
+            <h2 class="section-title">Curated Excellence</h2>
+            <p class="section-tagline">Hand-picked for their exceptional service, breathtaking locations, and unparalleled luxury amenities.</p>
+        </div>
         <div class="scroll-hint">
             <span>Swipe to explore more resorts</span>
             <i class="fas fa-arrow-right"></i>
