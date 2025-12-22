@@ -4,17 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Luxury Resort Destinations</title>
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
-    <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <!-- YouTube iFrame API -->
-    <script src="https://www.youtube.com/iframe_api"></script>
     
     <style>
-        /* Base Styles */
         :root {
             --primary-color: #0e3659;
             --secondary-color: #f8a202;
@@ -47,26 +40,16 @@
             padding: 0 20px;
         }
 
-        /* Typography */
         h1, h2, h3 {
             font-family: 'Playfair Display', serif;
             font-weight: 700;
             margin-bottom: 10px;
         }
 
-        h1 {
-            font-size: 2.5rem;
-        }
+        h1 { font-size: 2.5rem; }
+        h2 { font-size: 1.5rem; }
+        p { margin-bottom: 15px; }
 
-        h2 {
-            font-size: 1.5rem;
-        }
-
-        p {
-            margin-bottom: 15px;
-        }
-
-        /* Header */
         header {
             background-color: var(--primary-color);
             color: var(--light-text);
@@ -83,30 +66,6 @@
             font-weight: 300;
         }
 
-        /* Note Banner */
-        .note-banner {
-            background-color: #fff3cd;
-            border-left: 4px solid var(--secondary-color);
-            padding: 15px 20px;
-            margin-bottom: 30px;
-            border-radius: 4px;
-        }
-
-        .note-banner p {
-            margin: 0;
-            color: #856404;
-        }
-
-        /* Resorts Container */
-        .resorts-container {
-            display: flex;
-            gap: 30px;
-            margin-bottom: 60px;
-            padding: 1rem;
-            justify-content: center;
-        }
-
-        /* Scroll hint for mobile */
         .scroll-hint {
             display: none;
             text-align: center;
@@ -131,14 +90,22 @@
             to { opacity: 1; }
         }
 
-        /* Resort Card */
+        .resorts-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 60px;
+            padding: 1rem;
+            justify-content: center;
+        }
+
         .resort-card {
             background-color: #fff;
             border-radius: 8px;
             overflow: hidden;
             box-shadow: var(--shadow);
             transition: var(--transition);
-            width:400px;
+            width: 350px;
         }
 
         .resort-card:hover {
@@ -251,7 +218,6 @@
             font-size: 1.1rem;
         }
 
-        /* Modal */
         .modal {
             display: none;
             position: fixed;
@@ -299,12 +265,10 @@
 
         #youtube-player {
             position: relative;
-            height: 400px !important;
+            padding-bottom: 56.25%;
+            height: 0;
             overflow: hidden;
             margin-bottom: 20px;
-            max-height: 400px !important;
-            width: 100% !important;
-            margin: 0 auto;   
         }
 
         #youtube-player iframe {
@@ -316,7 +280,6 @@
             border: none;
         }
 
-        /* Footer */
         footer {
             background-color: var(--dark-bg);
             color: var(--tertiary-color);
@@ -325,31 +288,17 @@
             margin-top: 40px;
         }
 
-        /* Responsive Design */
         @media (max-width: 1000px) {
-            h1 {
-                font-size: 2rem;
-            }
+            h1 { font-size: 2rem; }
+            header { padding: 30px 0; }
+            .container { padding: 0; }
+            .scroll-hint { display: block; padding: 0 20px; }
             
-            header {
-                padding: 30px 0;
-            }
-
-            .container {
-                padding: 0;
-            }
-
-            /* Show scroll hint on mobile */
-            .scroll-hint {
-                display: block;
-                padding: 0 20px;
-            }
-            
-            /* Horizontal scroll for mobile */
             .resorts-container {
                 display: flex;
                 overflow-x: auto;
                 overflow-y: hidden;
+                flex-wrap: nowrap;
                 gap: 20px;
                 padding: 0 20px 20px 20px;
                 margin-bottom: 40px;
@@ -359,24 +308,10 @@
                 scrollbar-color: var(--secondary-color) var(--tertiary-color);
             }
 
-            /* Webkit scrollbar styling */
-            .resorts-container::-webkit-scrollbar {
-                height: 8px;
-            }
-
-            .resorts-container::-webkit-scrollbar-track {
-                background: var(--tertiary-color);
-                border-radius: 10px;
-            }
-
-            .resorts-container::-webkit-scrollbar-thumb {
-                background: var(--secondary-color);
-                border-radius: 10px;
-            }
-
-            .resorts-container::-webkit-scrollbar-thumb:hover {
-                background: #e09100;
-            }
+            .resorts-container::-webkit-scrollbar { height: 8px; }
+            .resorts-container::-webkit-scrollbar-track { background: var(--tertiary-color); border-radius: 10px; }
+            .resorts-container::-webkit-scrollbar-thumb { background: var(--secondary-color); border-radius: 10px; }
+            .resorts-container::-webkit-scrollbar-thumb:hover { background: #e09100; }
 
             .resort-card {
                 flex: 0 0 85%;
@@ -384,55 +319,18 @@
                 scroll-snap-align: center;
             }
 
-            /* Make play overlay always visible on mobile for better UX */
-            .play-overlay {
-                opacity: 0.8;
-            }
-
-            .play-overlay i {
-                font-size: 2.5rem;
-            }
-            
-            .modal-content {
-                width: 95%;
-                margin: 10% auto;
-                padding: 15px;
-            }
-            
-            #youtube-player {
-                height: 300px !important;
-            }
+            .play-overlay { opacity: 0.8; }
+            .play-overlay i { font-size: 2.5rem; }
+            .modal-content { width: 95%; margin: 10% auto; padding: 15px; }
         }
 
         @media (max-width: 480px) {
-            h1 {
-                font-size: 1.7rem;
-            }
-            
-            header p {
-                font-size: 1rem;
-            }
-            
-            .resort-card {
-                flex: 0 0 90%;
-            }
-            
-            .resort-image {
-                height: 180px;
-            }
-
-            .watch-video-btn {
-                padding: 8px 16px;
-                font-size: 0.9rem;
-            }
-            
-            .modal-content {
-                margin: 15% auto;
-            }
-            
-            #youtube-player {
-                height: 250px !important;
-            }
+            h1 { font-size: 1.7rem; }
+            header p { font-size: 1rem; }
+            .resort-card { flex: 0 0 90%; }
+            .resort-image { height: 180px; }
+            .watch-video-btn { padding: 8px 16px; font-size: 0.9rem; }
+            .modal-content { margin: 15% auto; }
         }
     </style>
 </head>
@@ -446,14 +344,35 @@
     </header>
 
     <main>
-    
         <div class="scroll-hint">
             <span>Swipe to explore more resorts</span>
             <i class="fas fa-arrow-right"></i>
         </div>
         
         <section class="resorts-container">
-            <div class="resort-card" data-video-id="calnk78JcoQ">
+            <div class="resort-card" data-video-id="hlWiI4xVXKY">
+                <div class="resort-image">
+                    <img src="https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Tropical Beach Paradise">
+                    <div class="play-overlay">
+                        <i class="fas fa-play-circle" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="resort-info">
+                    <div class="resort-header">
+                        <h2>Tropical Beach Paradise</h2>
+                    </div>
+                    <p class="location"><i class="fas fa-map-marker-alt"></i> Riviera Maya, Mexico</p>
+                    <p class="description">Experience the perfect blend of relaxation and adventure at this tropical paradise. Enjoy world-class amenities, stunning ocean views, and exclusive access to private beaches.</p>
+                    <div class="button-container">
+                        <button class="watch-video-btn">
+                            <i class="fas fa-play"></i>
+                            <span>See Details</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="resort-card" data-video-id="q1CtdxdNNwY">
                 <div class="resort-image">
                     <img src="https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Hard Rock Hotel Riviera Maya">
                     <div class="play-overlay">
@@ -465,160 +384,166 @@
                         <h2>Hard Rock Hotel Riviera Maya</h2>
                     </div>
                     <p class="location"><i class="fas fa-map-marker-alt"></i> Riviera Maya, Mexico</p>
-                    <p class="description">Experience the perfect blend of rock 'n' roll atmosphere and tropical paradise at the Hard Rock Hotel Riviera Maya.</p>
+                    <p class="description">Experience the perfect blend of rock 'n' roll atmosphere and tropical paradise at the Hard Rock Hotel Riviera Maya. Enjoy world-class amenities, stunning ocean views, and exclusive access to private beaches.</p>
                     <div class="button-container">
-                        <a href="#" class="watch-video-btn">
+                        <button class="watch-video-btn">
                             <i class="fas fa-play"></i>
                             <span>See Details</span>
-                        </a>
+                        </button>
                     </div>
                 </div>
             </div>
 
-            <div class="resort-card" data-video-id="P8jgEmbeO9A">
+            <div class="resort-card" data-video-id="nHOAkgEB5c0">
                 <div class="resort-image">
-                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="All-inclusive St. Maarten Resort">
+                    <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Singapore Skyline Resort">
                     <div class="play-overlay">
-                        <i class="fas fa-play-circle"></i>
+                        <i class="fas fa-play-circle" aria-hidden="true"></i>
                     </div>
                 </div>
                 <div class="resort-info">
                     <div class="resort-header">
-                        <h2>All-inclusive St. Maarten Resort</h2>
+                        <h2>Singapore Skyline Resort</h2>
                     </div>
-                    <p class="location"><i class="fas fa-map-marker-alt"></i> Maho, Sint Maarten</p>
-                    <p class="description">Indulge in an all-inclusive experience at this stunning beachfront resort in the beautiful Caribbean island of Sint Maarten.</p>
+                    <p class="location"><i class="fas fa-map-marker-alt"></i> Singapore</p>
+                    <p class="description">An integrated resort fronting Marina Bay in Singapore. Features the world's largest rooftop Infinity Pool, award-winning dining, and a wide range of shopping and entertainment options.</p>
                     <div class="button-container">
-                        <a href="#" class="watch-video-btn">
+                        <button class="watch-video-btn">
                             <i class="fas fa-play"></i>
                             <span>See Details</span>
-                        </a>
+                        </button>
                     </div>
                 </div>
             </div>
 
-            <div class="resort-card" data-video-id="cNDjxK2_HpA">
+            <div class="resort-card" data-video-id="oJH8sV7LnAM">
                 <div class="resort-image">
-                    <img src="https://images.unsplash.com/photo-1540541338287-41700207dee6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Mauna Lani, Auberge Resorts Collection">
+                    <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Dubai Luxury Tower">
                     <div class="play-overlay">
-                        <i class="fas fa-play-circle"></i>
+                        <i class="fas fa-play-circle" aria-hidden="true"></i>
                     </div>
                 </div>
                 <div class="resort-info">
                     <div class="resort-header">
-                        <h2>Mauna Lani, Auberge Resorts</h2>
+                        <h2>Dubai Luxury Tower</h2>
                     </div>
-                    <p class="location"><i class="fas fa-map-marker-alt"></i> Kamuela, Hawaii</p>
-                    <p class="description">Discover the authentic Hawaiian luxury at this oceanfront paradise, offering breathtaking views and exceptional service.</p>
+                    <p class="location"><i class="fas fa-map-marker-alt"></i> Dubai, UAE</p>
+                    <p class="description">Experience ultimate luxury in Dubai's most iconic destination. Known for world-class architecture, it offers suite-only accommodation and discreet personalized service.</p>
                     <div class="button-container">
-                        <a href="#" class="watch-video-btn">
+                        <button class="watch-video-btn">
                             <i class="fas fa-play"></i>
                             <span>See Details</span>
-                        </a>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="resort-card" data-video-id="rYXdsOEWBj0">
+                <div class="resort-image">
+                    <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Tokyo Urban Sanctuary">
+                    <div class="play-overlay">
+                        <i class="fas fa-play-circle" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="resort-info">
+                    <div class="resort-header">
+                        <h2>Tokyo Urban Sanctuary</h2>
+                    </div>
+                    <p class="location"><i class="fas fa-map-marker-alt"></i> Tokyo, Japan</p>
+                    <p class="description">A sanctuary in the sky, this luxury hotel occupies the top floors of a modern tower. Traditional Japanese minimalism meets urban sophistication with panoramic city views.</p>
+                    <div class="button-container">
+                        <button class="watch-video-btn">
+                            <i class="fas fa-play"></i>
+                            <span>See Details</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="resort-card" data-video-id="qFUycwnbLJ4">
+                <div class="resort-image">
+                    <img src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Maldives Island Paradise">
+                    <div class="play-overlay">
+                        <i class="fas fa-play-circle" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <div class="resort-info">
+                    <div class="resort-header">
+                        <h2>Maldives Island Paradise</h2>
+                    </div>
+                    <p class="location"><i class="fas fa-map-marker-alt"></i> Maldives</p>
+                    <p class="description">Set on one of the largest islands in North Male Atoll, this ultra-luxury resort features pristine beaches, crystal-clear waters, and exclusive villa accommodations with private pools.</p>
+                    <div class="button-container">
+                        <button class="watch-video-btn">
+                            <i class="fas fa-play"></i>
+                            <span>See Details</span>
+                        </button>
                     </div>
                 </div>
             </div>
         </section>
-
-        <div id="video-modal" class="modal">
-            <div class="modal-content">
-                <span class="close-btn">&times;</span>
-                <h3 id="modal-resort-name"></h3>
-                <div id="youtube-player"></div>
-            </div>
-        </div>
     </main>
+
+    <div id="videoModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2 id="modal-resort-name"></h2>
+            <div id="youtube-player"></div>
+        </div>
+    </div>
 
     <footer>
         <div class="container">
-            <p>&copy; 2024 Luxury Resort Destinations. Portfolio Demo.</p>
+            <p>&copy; 2024 Luxury Resort Destinations. All rights reserved.</p>
         </div>
     </footer>
 
     <script>
-        $(document).ready(function() {
-            let player;
+        document.addEventListener('DOMContentLoaded', function() {
+            const modal = document.getElementById('videoModal');
+            const closeBtn = document.querySelector('.close-btn');
+            const modalResortName = document.getElementById('modal-resort-name');
+            const youtubePlayer = document.getElementById('youtube-player');
 
-            window.onYouTubeIframeAPIReady = function() {
-                console.log("YouTube API Ready");
-            };
-
-            // Function to open video modal
-            function openVideoModal(videoId, resortName) {
-                $('#modal-resort-name').text(resortName);
-                
-                if (player) {
-                    player.loadVideoById(videoId);
-                } else {
-                    player = new YT.Player('youtube-player', {
-                        height: '390',
-                        width: '640',
-                        videoId: videoId,
-                        playerVars: {
-                            'autoplay': 1,
-                            'modestbranding': 1,
-                            'rel': 0
-                        },
-                        events: {
-                            'onReady': onPlayerReady,
-                            'onError': onPlayerError
-                        }
-                    });
-                }
-                
-                $('#video-modal').fadeIn(300);
+            function openModal(videoId, resortName) {
+                modalResortName.textContent = resortName;
+                youtubePlayer.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
             }
-
-            // Play button overlay and image click
-            $('.play-overlay, .resort-image').on('click', function(e) {
-                e.stopPropagation();
-                const card = $(this).closest('.resort-card');
-                const videoId = card.data('video-id');
-                const resortName = card.find('h2').text();
-                openVideoModal(videoId, resortName);
-            });
-
-            // Watch Video button click
-            // $('.watch-video-btn').on('click', function(e) {
-            //     e.preventDefault();
-            //     e.stopPropagation();
-            //     const card = $(this).closest('.resort-card');
-            //     const videoId = card.data('video-id');
-            //     const resortName = card.find('h2').text();
-            //     openVideoModal(videoId, resortName);
-            // });
-
-            // Close modal
-            $('.close-btn').on('click', function() {
-                closeModal();
-            });
-
-            $('#video-modal').on('click', function(e) {
-                if (e.target === this) {
-                    closeModal();
-                }
-            });
-
-            $(document).on('keydown', function(e) {
-                if (e.key === 'Escape' && $('#video-modal').is(':visible')) {
-                    closeModal();
-                }
-            });
 
             function closeModal() {
-                $('#video-modal').fadeOut(300);
-                if (player && typeof player.pauseVideo === 'function') {
-                    player.pauseVideo();
-                }
+                modal.style.display = 'none';
+                youtubePlayer.innerHTML = '';
+                document.body.style.overflow = 'auto';
             }
 
-            function onPlayerReady(event) {
-                event.target.playVideo();
-            }
-            
-            function onPlayerError(event) {
-                console.error("YouTube Player Error:", event.data);
-            }
+            document.querySelectorAll('.resort-card').forEach(function(card) {
+                const videoId = card.getAttribute('data-video-id');
+                const resortName = card.querySelector('h2').textContent;
+
+                card.querySelector('.play-overlay').addEventListener('click', function() {
+                    openModal(videoId, resortName);
+                });
+
+                card.querySelector('.watch-video-btn').addEventListener('click', function() {
+                    openModal(videoId, resortName);
+                });
+            });
+
+            closeBtn.addEventListener('click', closeModal);
+
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && modal.style.display === 'block') {
+                    closeModal();
+                }
+            });
         });
     </script>
 </body>
