@@ -579,23 +579,48 @@
             }
         }
 
-        a.primary-link {
-            font-size: 40px;
-            color: black;
-            text-decoration: none;
-        }
+    /* New CSS */
+        .redirect-container {
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
+  padding: 4rem;
+  gap: 3rem;
+}
 
-        .portfolio-redirect .secondary-links a {
-            font-size: 28px;
-            color: black;
-            text-decoration: none;
-        }
+.redirect-image img {
+  max-width: 420px;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
 
-        .portfolio-redirect p {
-             font-size: 2.3rem;
-        }
-            
-        
+.redirect-content {
+  max-width: 520px;
+}
+
+.primary-link {
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding: 0.75rem 1.25rem;
+  background: #111;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.secondary-links {
+  margin-top: 1rem;
+}
+
+.secondary-links a {
+  margin-right: 1rem;
+  color: #555;
+  text-decoration: none;
+}
+/* end of new CSS */
         
     </style>
 </head>
