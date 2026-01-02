@@ -621,6 +621,43 @@
   color: #555;
   text-decoration: none;
 }
+
+/* title CSS */
+        .titleContainer {
+  text-align: center;
+  margin-top: 4rem;
+  margin-bottom: 3rem;
+}
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.titleContainer h1,
+.titleContainer h2 {
+  animation: slideIn 0.8s ease-out forwards;
+}
+
+.titleContainer h1 {
+  animation-delay: 0.1s;
+}
+
+.titleContainer h2 {
+  animation-delay: 0.3s;
+}
+.tagline-one {
+  font-weight: 400;
+  color: #555;
+  margin-top: 0.5rem;
+}
+
+        
         
 /* end of new CSS */
         
@@ -628,17 +665,16 @@
 </head>
 <body>
 
-       <!--header>
-        <div class="header-content">
-            <h1>Amy <span class="highlight">Littlefield-Bousamra</span></h1>
-            <h2 class="tagline-one"><em></i>UI-Focused Front-End Developer</em></h2>
-         </div>
-      </header-->
 
-     <div class="titleContainer">
-      <h1>Amy <span class="highlight">Littlefield-Bousamra</span></h1>
-      <h2 class="tagline-one"><em></i>UI-Focused Front-End Developer</em></h2>
-    </div>
+    <div class="titleContainer">
+  <h1>
+    Amy <span class="highlight">Littlefield-Bousamra</span>
+  </h1>
+  <h2 class="tagline-one">
+    <em>UI-Focused Front-End Developer</em>
+  </h2>
+</div>
+
   
 <div class="redirect-container">
   <div class="redirect-image">
