@@ -588,6 +588,7 @@
   padding: 1.6rem;
   gap: 3rem;
   justify-content: center;
+  background-color: #bcbcbc;
 }
 
 .redirect-image img {
@@ -628,9 +629,13 @@
 }
 
 /* title CSS */
-.titleContainer {
-  text-align: center;
+  .titleContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
 }
+    
 @keyframes slideIn {
   from {
     opacity: 0;
@@ -686,10 +691,6 @@
 </head>
 <body>
 
-
-
-    <div class="updatedPortfolio"> 
-        
 <div class="titleContainer">
   <h1>
     Amy <span class="highlight">Littlefield-Bousamra</span>
@@ -699,6 +700,8 @@
   </h2>
 </div>
 
+<div class="updatedPortfolio"> 
+        
 <div class="redirect-container">
   <div class="redirect-image">
     <img src="newportrait-diag.png" alt="Portfolio preview" />
